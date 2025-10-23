@@ -9,3 +9,5 @@ Our project aims to develop an intelligent application that can analyze football
 Using computer vision and machine learning models, the application would process match videos and extract performance metrics such as distance covered, successful passes, ball control efficiency, and defensive positioning. These metrics would then be analyzed by AI algorithms to generate personalized insights and improvement suggestions.
 
 This project demonstrates how AI can revolutionize the way coaches and analysts evaluate players, offering an objective, data-driven perspective that complements human expertise.
+
+Database : https://www.kaggle.com/datasets/maso0dahmed/football-players-data
