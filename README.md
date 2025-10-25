@@ -15,11 +15,6 @@
 ## Project Overview
 
 
-<p align="center">
-  <img src="[https://example.com/mon_image.png](https://www.psgacademyhongkong.com/new/wp-content/uploads/2024/07/OFFICIEL-Hakimi-Vitinha-Dembele-Ramos-Marquinhos-copy_1-1536x1298.png)" alt="Project Preview" width="600">
-</p>
-
-
 <img width="1536" height="1298" alt="OFFICIEL-Hakimi-Vitinha-Dembele-Ramos-Marquinhos-copy_1-1536x1298" src="https://github.com/user-attachments/assets/2614fe2f-4e62-4e47-a36e-efe08dbc5abc" />
 
 
