@@ -14,7 +14,7 @@
 
 ## Project Overview
 
-![Project Preview](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.franceinfo.fr%2Fsports%2Ffoot%2Fligue-des-champions%2Ffinale%2Fle-psg-remporte-la-premiere-ligue-des-champions-de-son-histoire-apres-son-ecrasante-victoire-contre-l-inter-milan-en-finale_7283880.html&psig=AOvVaw242oFEWa2DId-rpTTJw-dY&ust=1761473961566000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLDq-oOQv5ADFQAAAAAdAAAAABAE)
+![Project Preview]([https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.franceinfo.fr%2Fsports%2Ffoot%2Fligue-des-champions%2Ffinale%2Fle-psg-remporte-la-premiere-ligue-des-champions-de-son-histoire-apres-son-ecrasante-victoire-contre-l-inter-milan-en-finale_7283880.html&psig=AOvVaw242oFEWa2DId-rpTTJw-dY&ust=1761473961566000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLDq-oOQv5ADFQAAAAAdAAAAABAE](https://www.psgacademyhongkong.com/new/wp-content/uploads/2024/07/OFFICIEL-Hakimi-Vitinha-Dembele-Ramos-Marquinhos-copy_1-1536x1298.png))
 
 
 This project aims to develop an AI-based application for analyzing football players’ performances.  
