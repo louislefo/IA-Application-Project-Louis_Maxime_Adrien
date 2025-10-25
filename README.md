@@ -1,15 +1,53 @@
-## IA-Application-Project-Louis_Maxime_Adrien
+# AI Football Performance Analyzer
 
-# Title : AI Football Performance Analyzer
+## Group Project Proposal
 
-# Proposal :
+### Group Members
+- **Adrien Schuttig**, ECE Paris — [adrienschuttig@gmail.com](mailto:adrienschuttig@gmail.com)  
+- **Maxime Laurent**, ESILV Nantes — [maxime.laurent@edu.devinci.fr](mailto:maxime.laurent@edu.devinci.fr)  
+- **Louis Le Forestier**, ESILV Nantes — [louis.le_forestier@edu.devinci.fr](mailto:louis.le_forestier@edu.devinci.fr)
 
-Our project aims to develop an intelligent application that can analyze football players’ performances using Artificial Intelligence. The goal is to create a system capable of taking into account a wide range of data including speed, endurance, technical skills, positioning, and decision-making to provide a comprehensive assessment of each player’s abilities.
+**Repository:** [GitHub - IA Application Project](https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien)  
+**Dataset:** [Football Players Data (Kaggle)](https://www.kaggle.com/datasets/maso0dahmed/football-players-data)
 
-Using computer vision and machine learning models, the application would process match videos and extract performance metrics such as distance covered, successful passes, ball control efficiency, and defensive positioning. These metrics would then be analyzed by AI algorithms to generate personalized insights and improvement suggestions.
+---
 
-This project demonstrates how AI can revolutionize the way coaches and analysts evaluate players, offering an objective, data-driven perspective that complements human expertise.
+## Project Overview
 
-Database : https://www.kaggle.com/datasets/maso0dahmed/football-players-data
+This project aims to develop an AI-based application for analyzing football players’ performances.  
+Using **computer vision** and **machine learning**, the system will process match videos to extract and evaluate data such as:
 
-repo : https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien
+- Distance covered  
+- Successful passes  
+- Ball control and decision-making efficiency  
+- Positioning and defensive performance  
+
+The goal is to generate a comprehensive, data-driven assessment of each player’s abilities and provide personalized insights for improvement.
+
+---
+
+## Technologies
+
+- Python  
+- OpenCV  
+- TensorFlow / PyTorch  
+- Pandas / NumPy  
+- Streamlit or Flask  
+
+---
+
+## Objectives
+
+- Build an AI model to evaluate football performance  
+- Provide objective and visual feedback for players and coaches  
+- Demonstrate how AI can enhance decision-making in sports
+
+---
+
+## Authors
+
+Made with ❤️ by  
+**Adrien Schuttig**, **Maxime Laurent**, and **Louis Le Forestier**  
+for the **AI Application Project**
+
+---
