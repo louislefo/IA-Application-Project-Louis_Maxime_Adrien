@@ -14,9 +14,9 @@
 
 ## Project Overview
 
-
-<img width="420" height="355" alt="OFFICIEL-Hakimi-Vitinha-Dembele-Ramos-Marquinhos-copy_1-1536x1298" src="https://github.com/user-attachments/assets/2614fe2f-4e62-4e47-a36e-efe08dbc5abc" />
-
+<p align="center">
+  <img width="420" height="355" alt="OFFICIEL-Hakimi-Vitinha-Dembele-Ramos-Marquinhos-copy_1-1536x1298" src="https://github.com/user-attachments/assets/2614fe2f-4e62-4e47-a36e-efe08dbc5abc" />
+</p>
 
 
 This project aims to develop an AI-based application for analyzing football players’ performances.  
