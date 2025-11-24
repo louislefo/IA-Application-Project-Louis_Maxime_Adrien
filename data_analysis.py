@@ -3,7 +3,7 @@ import numpy as np
 
 # >>> TRÈS IMPORTANT : REMPLACER 'NOM_DU_FICHIER_EXACT.csv'
 # Si le nom est "football_players_data.csv", mettez-le ici.
-file_path = 'jeu de données/fifa_players.csv' 
+file_path = 'fifa_players.csv' 
 
 # 1. Chargement des données
 try:
