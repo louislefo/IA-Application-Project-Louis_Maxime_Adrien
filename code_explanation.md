@@ -131,3 +131,17 @@ This script is a simple utility to verify data accessibility and structure.
 1.  **Load Data**: Attempts to read `fifa_players.csv` (note: the script currently expects the file in the same directory or needs the path updated to `data/fifa_players.csv`).
 2.  **Preview**: Prints the first 5 rows (`df.head()`).
 3.  **Info**: Prints column information and memory usage (`df.info()`).
+
+---
+
+# Explanation of `ml_analysis.ipynb`
+
+## Purpose
+
+This Jupyter Notebook is an interactive version of `ml_analysis.py`. It allows for step-by-step execution and immediate visualization of results.
+
+## Key Differences from the Script
+
+- **Interactive**: Code is split into cells for better flow.
+- **Language**: Comments and markdown explanations are in **English**.
+- **Visualization**: Plots (like the regression scatter plot) are displayed directly in the notebook output.

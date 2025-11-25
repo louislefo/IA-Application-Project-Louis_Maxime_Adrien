@@ -15,25 +15,9 @@ Ce projet a pour but d'analyser un jeu de données de joueurs de football (FIFA)
 ### Scripts Python (`src/`)
 
 - **`ml_analysis.py`** : Script principal.
+
   - Charge et nettoie les données.
   - Entraîne un modèle de Régression Linéaire pour prédire le `overall_rating`.
-  - Crée une classe cible `future_class` et entraîne une Régression Logistique pour la prédire.
-  - Évalue les modèles et teste sur un joueur exemple.
-  - Génère un graphique `reg_true_vs_pred.png`.
-- **`data_analysis.py`** : Script utilitaire pour vérifier le chargement des données et afficher les informations de base (colonnes, types).
-
-### Notebooks
-
-- **`analyse.ipynb`** : Notebook d'Analyse Exploratoire de Données (EDA).
-  - Chargement du CSV.
-  - Visualisation des premières lignes et des types de données.
-  - Statistiques descriptives (moyenne, écart-type, etc.) pour comprendre la distribution des attributs.
-
-### Données
-
-- `data/fifa_players.csv` : Le jeu de données brut contenant les informations des joueurs.
-
-### Documentation
 
 - `code_explanation.md` : Explication détaillée du fonctionnement du code.
 - `Projet.md` : Ce fichier, résumé du projet.
