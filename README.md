@@ -48,7 +48,7 @@ We are using the **Football Players Data** from Kaggle.
 ### Data Analysis
 
 We perform a distribution analysis to understand the distribution of player ratings.
-![Distribution of Player Ratings](Images/analyse/distribution_overall_rating.png)
+![Distribution of Player Ratings](Images/analyse/distributions.png)
 
 We perform a correlation analysis to understand the relationships between different features.
 ![Correlation Matrix](Images/analyse/correlation_heatmap.png)
