@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
+import os
 
-# >>> TRÈS IMPORTANT : REMPLACER 'NOM_DU_FICHIER_EXACT.csv'
-# Si le nom est "football_players_data.csv", mettez-le ici.
-file_path = 'fifa_players.csv' 
+file_path = os.path.join(os.path.dirname(__file__), '../data/fifa_players.csv') 
 
 # 1. Chargement des données
 try:
