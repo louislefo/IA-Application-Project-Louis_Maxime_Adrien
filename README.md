@@ -90,12 +90,6 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
     <img src="Images/analyse/value_vs_rating.png" width="500">
   </p>
 
-- **Top Nationalities:** **Spain** (1,341 players), **Argentina**, and **France** are the most represented countries.
-
-  <p align="left">
-    <img src="Images/analyse/top_nationalities.png" width="500">
-  </p>
-
 ---
 
 ### Critical Data Assessment
