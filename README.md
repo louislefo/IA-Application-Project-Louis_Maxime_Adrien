@@ -23,15 +23,20 @@
 
 ### Motivation: Why are we doing this?
 
-Football is a data-rich sport where analyzing player performance can significantly impact scouting, training, and match strategy. We aim to leverage machine learning to move beyond subjective observation and provide data-driven insights into player capabilities and potential.
+Modern football has become a highly data-driven sport. Clubs rely on increasingly large and complex datasets to optimize player performance, improve scouting efficiency, and design match strategies. However, transforming raw statistics into meaningful insights remains a major challenge.
+Our goal is to leverage machine learning to move beyond subjective observations and provide objective, interpretable, and predictive evaluations of player performance.
 
-### What do we want to see at the end?
+In essence, we aim to understand what truly defines a player’s quality and how their level is likely to evolve in the future.
+
+### What do we want to achieve?
 
 We aim to build a system that can:
 
 1.  **Analyze** current player statistics to evaluate their overall performance.
 2.  **Predict** a player's future development trajectory (e.g., will they improve, stay stable, or decline?).
 3.  **Visualize** these insights in an accessible way for coaches and analysts.
+
+These capabilities can support real-world applications such as transfer decision-making, youth development monitoring, match preparation, and long-term squad planning.
 
 ## II. Datasets
 
