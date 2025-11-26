@@ -90,6 +90,12 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
     <img src="Images/analyse/value_vs_rating.png" width="500">
   </p>
 
+- **Top Nationalities:** **Spain** (1,341 players), **Argentina**, and **France** are the most represented countries.
+
+  <p align="left">
+    <img src="Images/analyse/top_nationalities.png" width="500">
+  </p>
+
 ---
 
 ### Critical Data Assessment
@@ -101,25 +107,81 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
 
 ## III. Methodology
 
-### Choice of Algorithms
+We implemented a dual-model approach to analyze both current ability and future potential.
 
-We employ two primary machine learning models using `scikit-learn`:
+### 1. Feature Engineering: Defining Future Growth
 
-1.  **Linear Regression (for Current Performance):**
+To predict a player's trajectory, we first needed to define what "growth" means. We created a custom target variable `future_class` based on the gap between a player's `potential` and their current `overall_rating`, while also considering their `age`.
 
-    - **Goal:** Predict a player's `overall_rating`.
-    - **Why:** The target variable is continuous. Linear regression provides a clear interpretation of how each feature (like speed or shooting) contributes to the overall score.
+**Code Implementation:**
 
-2.  **Logistic Regression (for Future Development):**
-    - **Goal:** Classify a player's future growth into categories: `high_growth`, `likely_improve`, `stable`, or `decline`.
-    - **Why:** This is a classification problem. We created a custom target variable based on the gap between `potential` and `overall_rating` and the player's `age`. Logistic regression allows us to estimate the probability of a player falling into each category.
+```python
+def build_future_label(row):
+    """
+    Categorizes a player's future growth potential.
+    """
+    gap = row["potential"] - row["overall_rating"]
+    age = row["age"]
 
-### Features
+    # Young players with huge potential gap
+    if gap >= 10 and age <= 23:
+        return "high_growth"
+    # Players with significant room for improvement
+    elif gap >= 4:
+        return "likely_improve"
+    # Players near their peak
+    elif gap >= -2:
+        return "stable"
+    # Players in decline
+    else:
+        return "decline"
+```
 
-We selected a subset of key attributes that most strongly correlate with performance:
+### 2. Algorithm Selection & Implementation
 
-- **Physical:** Age, Height, Weight, Acceleration, Sprint Speed, Stamina, Strength.
-- **Technical:** Finishing, Dribbling, Short Passing.
+We utilized `scikit-learn` to implement two distinct models, chosen for their interpretability and effectiveness on tabular data.
+
+#### A. Linear Regression (Current Performance)
+
+**Goal:** Predict the continuous `overall_rating`.
+**Why:** Linear Regression allows us to quantify exactly how much each specific skill (e.g., +1 in Dribbling) contributes to the overall rating.
+
+```python
+# 1. Select Features
+X = df_clean[feature_cols] # Age, Physical & Technical stats
+y = df_clean["overall_rating"]
+
+# 2. Split Data (80% Train, 20% Test)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 3. Train Model
+reg_model = LinearRegression()
+reg_model.fit(X_train, y_train)
+```
+
+#### B. Logistic Regression (Future Classification)
+
+**Goal:** Classify players into one of the 4 growth categories.
+**Why:** Logistic Regression provides not just a classification, but the _probability_ of a player belonging to each class, which is crucial for risk assessment in scouting.
+
+```python
+# 1. Prepare Target
+y_cls = df_clean["future_class"]
+
+# 2. Train Model (Multinomial for multi-class classification)
+clf = LogisticRegression(max_iter=1000, multi_class="multinomial")
+clf.fit(X_train, y_cls)
+
+# 3. Predict Probabilities
+future_proba = clf.predict_proba(example_player_stats)
+```
+
+### 3. Key Features Used
+
+We focused on attributes with the highest correlation to performance, avoiding overfitting by selecting a balanced subset:
+
+- **Physical:** `age`, `height_cm`, `weight_kgs`, `acceleration`, `sprint_speed`, `stamina`, `strength`
+- **Technical:** `finishing`, `dribbling`, `short_passing`
 
 ## IV. Evaluation & Analysis
 
