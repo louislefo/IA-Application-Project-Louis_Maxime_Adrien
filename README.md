@@ -35,23 +35,75 @@ We aim to build a system that can:
 
 ## II. Datasets
 
-We are using the **Football Players Data** from Kaggle.
+We are using the **Football Players Data** dataset from Kaggle for this study.
 
-- **Source:** [Kaggle Link](https://www.kaggle.com/datasets/maso0dahmed/football-players-data)
-- **Description:** The dataset contains approximately 17,900 rows and 51 columns. It includes comprehensive details about football players, such as:
-  - **Personal Info:** Name, Age, Nationality, Club.
-  - **Physical Metrics:** Height, Weight.
-  - **Technical Skills:** Finishing, Dribbling, Passing, Ball Control.
-  - **Physical Attributes:** Acceleration, Sprint Speed, Stamina, Strength.
-  - **Ratings:** Overall Rating, Potential.
+### Source and Description
 
-### Data Analysis
+| Attribute   | Details                                                                                                 |
+| :---------- | :------------------------------------------------------------------------------------------------------ |
+| **Source**  | [Kaggle Link: Football Players Data](https://www.kaggle.com/datasets/maso0dahmed/football-players-data) |
+| **Size**    | 17,954 rows (players)                                                                                   |
+| **Columns** | 51 attributes (physical, technical, mental, ratings)                                                    |
 
-We perform a distribution analysis to understand the distribution of player ratings.
-![Distribution of Player Ratings](Images/analyse/distributions.png)
+---
 
-We perform a correlation analysis to understand the relationships between different features.
-![Correlation Matrix](Images/analyse/correlation_heatmap.png)
+### Exploratory Data Analysis (EDA)
+
+The EDA helped in understanding the data structure and identifying key relationships for modeling.
+
+#### 1. Skill Distribution
+
+The distribution of ratings (`overall_rating` and `potential`) is **strongly skewed to the right**, indicating that the majority of players fall into the low to medium rating categories.
+
+<p align="center">
+  <img src="Images/analyse/distributions.png" width="500">
+</p>
+
+#### 2. Correlation with Performance (`overall_rating`)
+
+The correlation matrix highlights the attributes that most influence the overall rating.
+
+| Attribute           | Correlation | Observation                                                                         |
+| :------------------ | :---------- | :---------------------------------------------------------------------------------- |
+| **`reactions`**     | **0.84**    | The most predictive attribute, emphasizing the importance of rapid decision-making. |
+| **`potential`**     | 0.69        | Indicates a strong influence of future prospects on the current assessment.         |
+| **`composure`**     | 0.68        | A key mental factor for performance.                                                |
+| **`short_passing`** | 0.59        | Core technical skills are crucial.                                                  |
+
+<p align="center">
+  <img src="Images/analyse/correlation_heatmap.png" width="500">
+</p>
+
+#### 3. Age, Value, and Nationality Relationship
+
+Age analysis confirms that the average player level (`overall_rating`) **peaks between 27 and 31 years** before declining.
+
+- **Age vs Rating:**
+
+  <p align="left">
+    <img src="Images/analyse/age_vs_rating.png" width="500">
+  </p>
+
+- **Value vs Rating:** Market value (`value_euro`) is highly correlated with the overall rating, increasing exponentially, as shown on the logarithmic scale.
+
+  <p align="left">
+    <img src="Images/analyse/value_vs_rating.png" width="500">
+  </p>
+
+- **Top Nationalities:** **Spain** (1,341 players), **Argentina**, and **France** are the most represented countries.
+
+  <p align="left">
+    <img src="Images/analyse/top_nationalities.png" width="500">
+  </p>
+
+---
+
+### Critical Data Assessment
+
+| Category               | Positive Points                                                                       | Negative Points                                                                                                                                 |
+| :--------------------- | :------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Feature Richness**   | ✅ **51 varied attributes** (physical, technical, mental) for comprehensive analysis. | ❌ High **Multicollinearity** (several attributes are highly correlated with each other), which will necessitate rigorous feature selection.    |
+| **Modeling Objective** | ✅ **`potential`** is an excellent indicator for future growth prediction.            | ❌ The `overall_rating` relies heavily on the **`reactions`** variable, which could bias the model if overused, at the expense of other skills. |
 
 ## III. Methodology
 
