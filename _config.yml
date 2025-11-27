@@ -1,0 +1,5 @@
+title: AI Football Performance Analyzer
+description: Analyze player statistics and predict future development.
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-seo-tag

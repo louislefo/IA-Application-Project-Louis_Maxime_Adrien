@@ -1,3 +1,8 @@
+---
+layout: default
+title: Home
+---
+
 # AI Football Performance Analyzer
 
 **Members:**
