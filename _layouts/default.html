@@ -13,25 +13,22 @@
 <body>
 
   <!-- Colored Banner -->
-  <header class="site-header">
-    <div class="wrapper">
-      <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
-      <nav class="site-nav">
-        <a href="#" class="menu-icon">
-          <i class="fas fa-bars"></i>
-        </a>
-        <div class="trigger">
-            <!-- Add navigation links here if needed -->
-        </div>
-      </nav>
-    </div>
-  </header>
+
 
   <div class="banner-container">
       <div class="banner-content">
           <h1>Welcome to Our AI Project</h1>
           <p>Analyzing Football Performance with Machine Learning</p>
+          <a href="https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien" class="banner-btn" target="_blank">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
       </div>
+  </div>
+
+  <div class="wrapper" style="position: relative;">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+      <i class="fas fa-moon"></i>
+    </button>
   </div>
 
   <main class="page-content" aria-label="Content">
@@ -45,6 +42,34 @@
       <p>{{ site.description | escape }}</p>
     </div>
   </footer>
+
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+    const icon = toggleButton.querySelector('i');
+
+    // Check for saved user preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+
+    toggleButton.addEventListener('click', function() {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+  </script>
 
 </body>
 </html>
