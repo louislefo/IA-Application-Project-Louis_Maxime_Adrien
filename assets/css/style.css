@@ -244,6 +244,13 @@ th {
   margin-top: 60px;
 }
 
+/* Définir une taille fixe pour l'icône du footer */
+.footer-icon {
+    height: 24px; /* Essaye 24px, 32px, 40px, etc., jusqu'à ce que cela te plaise */
+    width: auto; /* Maintient le ratio d'aspect */
+    vertical-align: middle; /* Aide à l'alignement si l'icône est à côté de texte */
+}
+
 /* Code Blocks */
 pre {
   background-color: #f6f8fa;
