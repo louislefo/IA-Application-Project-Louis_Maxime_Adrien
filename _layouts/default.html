@@ -16,7 +16,7 @@
   <!-- Colored Banner -->
   <div class="banner-container">
       <div class="banner-content">
-          <div class="site-logo" style="font-size: 4rem; margin-bottom: 10px; animation: bounce 2s infinite;">⚽</div>
+          <!-- <div class="site-logo" style="font-size: 4rem; margin-bottom: 10px; animation: bounce 2s infinite;">⚽</div> -->
           <h1>Welcome to Our AI Project</h1>
           <p>Analyzing Football Performance with Machine Learning</p>
           <a href="https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien" class="banner-btn" target="_blank">
@@ -49,8 +49,10 @@
 
             <div class="social-links">
                 <h4>Follow Us</h4>
-                <a href="https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien" aria-label="GitHub"><img class="footer-icon" src="Images/site/github-mark-white.png" alt="GitHub"></a>
-                </div>
+                <a href="https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien" aria-label="GitHub">
+                  <img id="github-icon" class="footer-icon" src="Images/site/github-svg-black.svg" alt="GitHub">
+                </a>
+            </div>
         </div>
     </div>
 </footer>
@@ -59,6 +61,17 @@
     const toggleButton = document.getElementById('theme-toggle');
     const body = document.body;
     const icon = toggleButton.querySelector('i');
+    const githubIcon = document.getElementById('github-icon');
+
+    // Paths to icons
+    const iconLight = 'Images/site/github-svg-black.svg';
+    const iconDark = 'Images/site/github-svg- white.svg';
+
+    function updateGithubIcon(isDark) {
+      if (githubIcon) {
+        githubIcon.src = isDark ? iconDark : iconLight;
+      }
+    }
 
     // Check for saved user preference
     const currentTheme = localStorage.getItem('theme');
@@ -66,12 +79,18 @@
       body.classList.add('dark-mode');
       icon.classList.remove('fa-moon');
       icon.classList.add('fa-sun');
+      updateGithubIcon(true);
+    } else {
+      updateGithubIcon(false);
     }
 
     toggleButton.addEventListener('click', function() {
       body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
       
-      if (body.classList.contains('dark-mode')) {
+      updateGithubIcon(isDark);
+
+      if (isDark) {
         localStorage.setItem('theme', 'dark');
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
