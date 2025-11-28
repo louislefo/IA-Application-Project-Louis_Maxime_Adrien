@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #3a86ff;
-  --secondary-color: #8338ec;
-  --accent-color: #ff006e;
+  --primary-color: #214d94;
+  --secondary-color: #522196;
+  --accent-color: #8a1145;
   --text-color: #333;
   --bg-color: #f8f9fa;
   --header-bg: #ffffff;
@@ -246,7 +246,7 @@ th {
 
 /* Définir une taille fixe pour l'icône du footer */
 .footer-icon {
-    height: 18px; /* Reduced size as requested */
+    height: 40px; /* Reduced size as requested */
     width: auto; /* Maintient le ratio d'aspect */
     vertical-align: middle; /* Aide à l'alignement si l'icône est à côté de texte */
 }
