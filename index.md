@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Home
+title: AI Football Performance Analyzer
 ---
 
 # AI Football Performance Analyzer

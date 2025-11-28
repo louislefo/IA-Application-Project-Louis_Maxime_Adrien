@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #3a86ff;
-  --secondary-color: #8338ec;
-  --accent-color: #ff006e;
-  --text-color: #333;
+  --primary-color: #0d2d60;
+  --secondary-color: #34185b;
+  --accent-color: #550b2b;
+  --text-color: #a99c9c;
   --bg-color: #f8f9fa;
   --header-bg: #ffffff;
 }
@@ -234,4 +234,60 @@ th {
   padding: 30px 0;
   text-align: center;
   margin-top: 60px;
+}
+
+/* Code Blocks */
+pre {
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  border: 1px solid #e1e4e8;
+  margin-bottom: 20px;
+}
+
+code {
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  padding: 0.2em 0.4em;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 100%;
+  border: 0;
+}
+
+/* Dark Mode Code Blocks */
+body.dark-mode pre {
+  background-color: #2d2d2d;
+  border-color: #444;
+}
+
+body.dark-mode code {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f0f0f0;
+}
+
+body.dark-mode pre code {
+  background-color: transparent;
+  color: inherit;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
 }
