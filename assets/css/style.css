@@ -2,7 +2,7 @@
   --primary-color: #0d2d60;
   --secondary-color: #34185b;
   --accent-color: #550b2b;
-  --text-color: #a99c9c;
+  --text-color: #343333;
   --bg-color: #f8f9fa;
   --header-bg: #ffffff;
 }
@@ -38,6 +38,14 @@ body.dark-mode td {
 
 body.dark-mode blockquote {
     color: #ccc;
+}
+
+body.dark-mode a {
+    color: #4da3ff;
+}
+
+body.dark-mode a:hover {
+    color: #79c0ff;
 }
 
 /* Theme Toggle Button */
