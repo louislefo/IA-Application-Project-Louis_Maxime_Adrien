@@ -246,10 +246,26 @@ th {
 
 /* Définir une taille fixe pour l'icône du footer */
 .footer-icon {
-    height: 24px; /* Essaye 24px, 32px, 40px, etc., jusqu'à ce que cela te plaise */
+    height: 18px; /* Reduced size as requested */
     width: auto; /* Maintient le ratio d'aspect */
     vertical-align: middle; /* Aide à l'alignement si l'icône est à côté de texte */
 }
+
+/* Syntax Highlighting - Light Mode */
+.highlight .c, .highlight .cm, .highlight .cp, .highlight .c1, .highlight .cs { color: #6a737d; } /* Comment */
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr, .highlight .kt { color: #d73a49; } /* Keyword */
+.highlight .n, .highlight .na, .highlight .nb, .highlight .nc, .highlight .no, .highlight .nd, .highlight .ni, .highlight .ne, .highlight .nf, .highlight .nl, .highlight .nn, .highlight .nt, .highlight .nv, .highlight .nx, .highlight .py, .highlight .bp, .highlight .vc, .highlight .vg, .highlight .vi { color: #24292e; } /* Name/Variable */
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #032f62; } /* String */
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo { color: #005cc5; } /* Number */
+.highlight .o, .highlight .ow { color: #d73a49; } /* Operator */
+
+/* Syntax Highlighting - Dark Mode */
+body.dark-mode .highlight .c, body.dark-mode .highlight .cm, body.dark-mode .highlight .cp, body.dark-mode .highlight .c1, body.dark-mode .highlight .cs { color: #8b949e; }
+body.dark-mode .highlight .k, body.dark-mode .highlight .kc, body.dark-mode .highlight .kd, body.dark-mode .highlight .kp, body.dark-mode .highlight .kr, body.dark-mode .highlight .kt { color: #ff7b72; }
+body.dark-mode .highlight .n, body.dark-mode .highlight .na, body.dark-mode .highlight .nb, body.dark-mode .highlight .nc, body.dark-mode .highlight .no, body.dark-mode .highlight .nd, body.dark-mode .highlight .ni, body.dark-mode .highlight .ne, body.dark-mode .highlight .nf, body.dark-mode .highlight .nl, body.dark-mode .highlight .nn, body.dark-mode .highlight .nt, body.dark-mode .highlight .nv, body.dark-mode .highlight .nx, body.dark-mode .highlight .py, body.dark-mode .highlight .bp, body.dark-mode .highlight .vc, body.dark-mode .highlight .vg, body.dark-mode .highlight .vi { color: #c9d1d9; }
+body.dark-mode .highlight .s, body.dark-mode .highlight .sa, body.dark-mode .highlight .sb, body.dark-mode .highlight .sc, body.dark-mode .highlight .dl, body.dark-mode .highlight .sd, body.dark-mode .highlight .s2, body.dark-mode .highlight .se, body.dark-mode .highlight .sh, body.dark-mode .highlight .si, body.dark-mode .highlight .sx, body.dark-mode .highlight .sr, body.dark-mode .highlight .s1, body.dark-mode .highlight .ss { color: #a5d6ff; }
+body.dark-mode .highlight .m, body.dark-mode .highlight .mb, body.dark-mode .highlight .mf, body.dark-mode .highlight .mh, body.dark-mode .highlight .mi, body.dark-mode .highlight .il, body.dark-mode .highlight .mo { color: #79c0ff; }
+body.dark-mode .highlight .o, body.dark-mode .highlight .ow { color: #ff7b72; }
 
 /* Code Blocks */
 pre {
