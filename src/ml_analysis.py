@@ -185,10 +185,13 @@ def main():
         print(f"  {cls:15s} -> {proba:.3f}")
 
     # Sauvegarder le modèle de régression (note actuelle)
-    joblib.dump(reg_model, 'models/regression_model.pkl')
+    models_dir = os.path.join(PROJECT_ROOT, 'models')
+    os.makedirs(models_dir, exist_ok=True)
+    
+    joblib.dump(reg_model, os.path.join(models_dir, 'regression_model.pkl'))
         
     # Sauvegarder le modèle de classification (futur)
-    joblib.dump(clf, 'models/classification_model.pkl')
+    joblib.dump(clf, os.path.join(models_dir, 'classification_model.pkl'))
     print("Modèles sauvegardés !")
 
 
