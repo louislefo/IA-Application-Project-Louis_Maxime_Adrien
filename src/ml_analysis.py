@@ -3,7 +3,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.metrics import mean_squared_error, r2_score, classification_report
@@ -172,6 +172,13 @@ def main():
     print("Probabilités par classe :")
     for cls, proba in zip(classes, future_proba_example):
         print(f"  {cls:15s} -> {proba:.3f}")
+
+    # Sauvegarder le modèle de régression (note actuelle)
+    joblib.dump(reg_model, 'models/regression_model.pkl')
+        
+    # Sauvegarder le modèle de classification (futur)
+    joblib.dump(clf, 'models/classification_model.pkl')
+    print("Modèles sauvegardés !")
 
 
 if __name__ == "__main__":
