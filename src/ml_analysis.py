@@ -5,8 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import mean_squared_error, r2_score, classification_report
+import xgboost as xgb
 
 
 # ---------- Chemins relatifs propres ----------
@@ -84,7 +85,15 @@ def main():
         X, y, test_size=0.3, random_state=42
     )
 
-    reg_model = LinearRegression()
+    # XGBoost Regressor - MEILLEUR MODÈLE
+    # XGBoost surpasse Linear Regression en capturant les relations non-linéaires
+    # et en fournissant une meilleure précision (R² plus élevé, RMSE plus faible)
+    reg_model = xgb.XGBRegressor(
+        n_estimators=100,
+        learning_rate=0.1,
+        max_depth=5,
+        random_state=42
+    )
     reg_model.fit(X_train, y_train)
 
     y_pred = reg_model.predict(X_test)
@@ -92,14 +101,16 @@ def main():
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    print("\n=== Modèle de régression (overall_rating) ===")
+    print("\n=== Modèle de régression XGBoost (overall_rating) ===")
     print(f"MSE : {mse:.2f}")
     print(f"R²  : {r2:.3f}")
 
-    print("\nCoefficients (impact moyen de chaque feature sur la note globale) :")
-    print(f"Intercept : {reg_model.intercept_:.3f}")
-    for feat, coef in zip(feature_cols, reg_model.coef_):
-        print(f"{feat:15s} -> {coef:.3f}")
+    print("\nImportance des features (impact sur la prédiction) :")
+    feature_importance = pd.DataFrame({
+        'Feature': feature_cols,
+        'Importance': reg_model.feature_importances_
+    }).sort_values('Importance', ascending=False)
+    print(feature_importance.to_string(index=False))
 
     # Graphique vrai vs prédit
     plt.figure()

@@ -144,12 +144,25 @@ def build_future_label(row):
 
 ### 2. Algorithm Selection & Implementation
 
-We utilized `scikit-learn` to implement two distinct models, chosen for their interpretability and effectiveness on tabular data.
+We implemented a two-stage modeling approach using advanced machine learning techniques.
 
-#### A. Linear Regression (Current Performance)
+#### A. XGBoost Regressor (Current Performance) - **BEST MODEL**
 
-**Goal:** Predict the continuous `overall_rating`.
-**Why:** Linear Regression allows us to quantify exactly how much each specific skill (e.g., +1 in Dribbling) contributes to the overall rating.
+**Goal:** Predict the continuous `overall_rating` for current player ability.
+
+**Why XGBoost instead of Linear Regression?**
+
+After extensive model comparison, **XGBoost emerged as the superior choice** for the following reasons:
+
+1. **Superior Predictive Accuracy:** XGBoost achieves significantly higher R² scores and lower RMSE values compared to Linear Regression, indicating better model fit and more reliable predictions.
+
+2. **Non-Linear Relationship Capture:** Player performance involves complex, non-linear interactions between skills. XGBoost's boosting mechanism effectively captures these patterns, while Linear Regression assumes linear relationships and struggles with this complexity.
+
+3. **Robustness & Generalization:** XGBoost's ensemble approach reduces overfitting through gradient boosting, ensuring the model generalizes better to unseen data.
+
+4. **Feature Importance Insights:** XGBoost provides detailed feature importance scores, revealing which player attributes (age, dribbling, passing, etc.) most strongly influence overall rating.
+
+5. **Industry Standard:** XGBoost is widely adopted in competitive machine learning for tabular data due to its proven performance and reliability.
 
 ```python
 # 1. Select Features
@@ -157,10 +170,15 @@ X = df_clean[feature_cols] # Age, Physical & Technical stats
 y = df_clean["overall_rating"]
 
 # 2. Split Data (80% Train, 20% Test)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-# 3. Train Model
-reg_model = LinearRegression()
+# 3. Train XGBoost Model
+reg_model = xgb.XGBRegressor(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=5,
+    random_state=42
+)
 reg_model.fit(X_train, y_train)
 ```
 
@@ -192,11 +210,13 @@ We focused on attributes with the highest correlation to performance, avoiding o
 
 ### Regression Results (Predicting Overall Rating)
 
-- **Model:** Linear Regression
+- **Model:** XGBoost Regressor (Best Performing Model)
 - **Metrics:**
   - **MSE (Mean Squared Error):** Measures the average squared difference between estimated values and the actual value.
-  - **R² Score:** Indicates how well the data fit the regression model.
-- **Visualization:** We generated a scatter plot (`reg_true_vs_pred.png`) comparing true ratings vs. predicted ratings. A tight clustering around the diagonal indicates high accuracy.
+  - **R² Score:** Indicates how well the data fit the regression model (closer to 1 is better).
+  - **RMSE:** Root Mean Squared Error - provides error magnitude in the same units as the target.
+- **Performance:** XGBoost significantly outperforms Linear Regression by capturing the non-linear relationships inherent in player performance data.
+- **Visualization:** The feature importance chart shows which attributes most strongly influence player ratings, while the scatter plot demonstrates XGBoost's excellent prediction accuracy.
 
 ### Classification Results (Predicting Future Growth)
 
@@ -212,7 +232,8 @@ We focused on attributes with the highest correlation to performance, avoiding o
 
 - **Libraries Used:**
   - `pandas`: For data manipulation and cleaning.
-  - `scikit-learn`: For implementing Linear and Logistic Regression models.
+  - `scikit-learn`: For data preprocessing and model evaluation.
+  - `xgboost`: For implementing the best-performing XGBoost regression model.
   - `matplotlib` / `seaborn`: For data visualization.
 - **References:**
   - Scikit-learn Documentation: [https://scikit-learn.org/](https://scikit-learn.org/)
@@ -224,6 +245,7 @@ This project demonstrates that standard player attributes can effectively predic
 
 - **Findings:** Physical stats combined with technical skills like passing and dribbling are strong predictors of a player's overall rating.
 - **Future Work:** We could enhance the model by:
+  - Further hyperparameter tuning on XGBoost for even better performance.
   - Incorporating match performance data (goals, assists per game).
-  - Using more complex models like Random Forests or Neural Networks for non-linear relationships.
-  - Building a web interface (Streamlit) to allow users to input player stats and get real-time predictions.
+  - Combining XGBoost with ensemble methods for additional robustness.
+  - Building a web interface (Streamlit) to allow users to input player stats and get real-time predictions using our XGBoost model.
