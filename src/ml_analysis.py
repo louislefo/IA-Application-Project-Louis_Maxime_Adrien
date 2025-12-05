@@ -124,7 +124,7 @@ def main():
     plt.plot([min_val, max_val], [min_val, max_val], "r--")  # diagonale parfaite
 
     plt.tight_layout()
-    out_path_plot = os.path.join(PROJECT_ROOT, "reg_true_vs_pred.png")
+    out_path_plot = "..\\Images\\ml\\reg_true_vs_pred.png"
     plt.savefig(out_path_plot)
     print(f"Graphique 'reg_true_vs_pred.png' sauvegardé à la racine du projet.")
 
