@@ -124,9 +124,14 @@ def main():
     plt.plot([min_val, max_val], [min_val, max_val], "r--")  # diagonale parfaite
 
     plt.tight_layout()
-    out_path_plot = "..\\Images\\ml\\reg_true_vs_pred.png"
+    
+    # Créer le dossier pour les images ML si nécessaire
+    ml_images_dir = os.path.join(PROJECT_ROOT, "Images", "ml")
+    os.makedirs(ml_images_dir, exist_ok=True)
+    
+    out_path_plot = os.path.join(ml_images_dir, "reg_true_vs_pred.png")
     plt.savefig(out_path_plot)
-    print(f"Graphique 'reg_true_vs_pred.png' sauvegardé à la racine du projet.")
+    print(f"Graphique 'reg_true_vs_pred.png' sauvegardé dans : {out_path_plot}")
 
     # 4) Modèle de CLASSIFICATION : prédire future_class
     df_clean["future_class"] = df_clean.apply(build_future_label, axis=1)
