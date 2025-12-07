@@ -1,12 +1,29 @@
 # src/ml_player_analysis.py
 
+# os : used for manipulating file paths and directories (building paths, checking existence, joining folders, etc.)
 import os
+
+# pandas : used for data loading, cleaning, manipulation, and creating DataFrames for ML models
 import pandas as pd
+
+# matplotlib.pyplot : used to generate plots, graphs, and visualizations (scatter plots, line plots, etc.)
 import matplotlib.pyplot as plt
+
+# joblib : used to save and load machine learning models efficiently (serialization of trained models)
 import joblib
+
+# train_test_split : used to split the dataset into training and testing subsets for model evaluation
 from sklearn.model_selection import train_test_split
+
+# LogisticRegression : used for multi-class classification (predicting future class / category)
 from sklearn.linear_model import LogisticRegression
+
+# mean_squared_error : metric to evaluate regression model accuracy (how far predictions are from real values)
+# r2_score : metric indicating proportion of explained variance (quality of regression predictions)
+# classification_report : generates precision/recall/F1 for classification tasks
 from sklearn.metrics import mean_squared_error, r2_score, classification_report
+
+# xgboost : powerful library for gradient boosting, used here for regression (predicting overall rating)
 import xgboost as xgb
 
 
