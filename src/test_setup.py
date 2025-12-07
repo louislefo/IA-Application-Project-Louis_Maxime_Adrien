@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script de test pour vérifier que tout fonctionne correctement
+Test script to verify that everything in the project works correctly
 """
 
 import os
@@ -8,26 +8,33 @@ import sys
 import pandas as pd
 import numpy as np
 
-# Ajouter le chemin du projet
+# Add the project path so we can import from src when running this file directly.
+# This makes "src" behave like an importable package when you run this file from the project root.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'src'))
 
+
 def check_data_files():
-    """Vérifier que les fichiers de données existent"""
-    print("🔍 Vérification des fichiers de données...")
+    """Check that the data files exist and can be loaded"""
+    # High-level check: makes sure the main CSV is present and readable.
+    print("🔍 Checking data files...")
     
     data_path = os.path.join(PROJECT_ROOT, 'data', 'fifa_players.csv')
     if os.path.exists(data_path):
+        # If the file exists, we also try to load it to catch encoding / parsing issues early.
         df = pd.read_csv(data_path)
-        print(f"  ✅ fifa_players.csv trouvé ({len(df)} lignes)")
+        print(f"  ✅ fifa_players.csv found ({len(df)} rows)")
         return True
     else:
-        print(f"  ❌ fifa_players.csv introuvable à {data_path}")
+        # If this fails, the rest of the ML pipeline will not work because it depends on this file.
+        print(f"  ❌ fifa_players.csv NOT FOUND at {data_path}")
         return False
 
+
 def check_models():
-    """Vérifier que les modèles existent"""
-    print("🔍 Vérification des modèles...")
+    """Check that the saved model files exist"""
+    # This checks that you already trained and saved the models (regression & classification).
+    print("🔍 Checking models...")
     
     models_dir = os.path.join(PROJECT_ROOT, 'models')
     reg_path = os.path.join(models_dir, 'regression_model.pkl')
@@ -36,22 +43,27 @@ def check_models():
     reg_exists = os.path.exists(reg_path)
     clf_exists = os.path.exists(clf_path)
     
+    # One message per model so you immediately see which one is missing.
     if reg_exists:
-        print(f"  ✅ regression_model.pkl trouvé")
+        print(f"  ✅ regression_model.pkl found")
     else:
-        print(f"  ❌ regression_model.pkl introuvable")
+        print(f"  ❌ regression_model.pkl NOT FOUND")
     
     if clf_exists:
-        print(f"  ✅ classification_model.pkl trouvé")
+        print(f"  ✅ classification_model.pkl found")
     else:
-        print(f"  ❌ classification_model.pkl introuvable")
+        print(f"  ❌ classification_model.pkl NOT FOUND")
     
+    # Only returns True if BOTH models are present.
     return reg_exists and clf_exists
 
+
 def check_dependencies():
-    """Vérifier que les dépendances sont installées"""
-    print("🔍 Vérification des dépendances...")
+    """Check that the required Python dependencies are installed"""
+    # This gives a quick overview of the Python environment status.
+    print("🔍 Checking dependencies...")
     
+    # Keys = import names, values = human-readable names printed to the user.
     required_packages = {
         'streamlit': 'Streamlit',
         'xgboost': 'XGBoost',
@@ -64,17 +76,22 @@ def check_dependencies():
     all_installed = True
     for package, name in required_packages.items():
         try:
+            # __import__ dynamically imports a module by its string name.
             __import__(package)
-            print(f"  ✅ {name} installé")
+            print(f"  ✅ {name} installed")
         except ImportError:
-            print(f"  ❌ {name} NON INSTALLÉ")
+            # If one dependency is missing, we keep going to show the full list of problems.
+            print(f"  ❌ {name} NOT INSTALLED")
             all_installed = False
     
+    # True only if every required package was successfully imported.
     return all_installed
 
+
 def test_models():
-    """Tester que les modèles fonctionnent"""
-    print("🔍 Test des modèles...")
+    """Test that the models can be loaded and used for predictions"""
+    # This is like a mini end-to-end test of the ML pipeline.
+    print("🔍 Testing models...")
     
     try:
         import joblib
@@ -83,7 +100,8 @@ def test_models():
         reg_model = joblib.load(os.path.join(models_dir, 'regression_model.pkl'))
         clf_model = joblib.load(os.path.join(models_dir, 'classification_model.pkl'))
         
-        # Test data
+        # Small dummy input to check end-to-end predictions.
+        # ⚠️ The columns here must match the features used during training.
         test_data = pd.DataFrame({
             'age': [25],
             'height_cm': [180],
@@ -97,23 +115,33 @@ def test_models():
             'strength': [70]
         })
         
-        # Test predictions
+        # Test predictions with both models:
+        # - regression: predicts an overall rating (float)
+        # - classification: predicts a future class label (string)
         rating = reg_model.predict(test_data)[0]
         future_class = clf_model.predict(test_data)[0]
         
-        print(f"  ✅ Régression OK - Note prédite: {rating:.2f}")
-        print(f"  ✅ Classification OK - Classe prédite: {future_class}")
+        print(f"  ✅ Regression OK - Predicted rating: {rating:.2f}")
+        print(f"  ✅ Classification OK - Predicted class: {future_class}")
         return True
         
     except Exception as e:
-        print(f"  ❌ Erreur lors du test des modèles: {e}")
+        # Any error here usually means:
+        # - models are incompatible with the current code,
+        # - feature names do not match,
+        # - or the pickle files are corrupted / missing.
+        print(f"  ❌ Error while testing models: {e}")
         return False
 
+
 def main():
+    # Pretty header to clearly delimit the global check in the terminal.
     print("\n" + "="*60)
-    print("🚀 VÉRIFICATION DU PROJET AI FOOTBALL ANALYZER")
+    print("🚀 PROJECT CHECK: AI FOOTBALL ANALYZER")
     print("="*60 + "\n")
     
+    # Run all checks and collect the results in a dict.
+    # Keys stay in French because they are reused in messages later.
     results = {
         "Fichiers de données": check_data_files(),
         "Modèles": check_models(),
@@ -121,32 +149,40 @@ def main():
         "Test des modèles": test_models() if check_models() else False
     }
     
+    # Global summary of all checks.
     print("\n" + "="*60)
-    print("📊 RÉSUMÉ")
+    print("📊 SUMMARY")
     print("="*60)
     
     for check, result in results.items():
-        status = "✅ OK" if result else "❌ ERREUR"
+        status = "✅ OK" if result else "❌ ERROR"
         print(f"{check}: {status}")
     
+    # Global success flag: True only if ALL checks passed.
     all_passed = all(results.values())
     
     print("\n" + "="*60)
     if all_passed:
-        print("✅ TOUT EST OK ! Vous pouvez lancer l'application :")
+        # Everything is good: user can launch the Streamlit app.
+        print("✅ EVERYTHING IS OK! You can launch the application with:")
         print("   streamlit run src/application.py")
     else:
-        print("❌ ERREURS DÉTECTÉES")
-        print("\nÉtapes de correction :")
+        # At least one check failed: display actionable next steps.
+        print("❌ ERRORS DETECTED")
+        print("\nSteps to fix:")
         if not results["Fichiers de données"]:
-            print("  1. Téléchargez les données FIFA et placez-les dans data/fifa_players.csv")
+            print("  1. Download the FIFA data and place it in data/fifa_players.csv")
         if not results["Modèles"]:
-            print("  2. Entraînez les modèles: python src/ml_analysis.py")
+            print("  2. Train the models: python src/ml_analysis.py")
         if not results["Dépendances"]:
-            print("  3. Installez les dépendances: pip install -r requirements.txt")
+            print("  3. Install dependencies: pip install -r requirements.txt")
     print("="*60 + "\n")
     
+    # Exit code convention:
+    # 0 = success, 1 = something is wrong (useful in CI or shell scripts).
     return 0 if all_passed else 1
 
+
 if __name__ == "__main__":
+    # sys.exit propagates the return code so that the shell/CI can detect failures.
     sys.exit(main())
