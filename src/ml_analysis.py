@@ -10,23 +10,35 @@ from sklearn.metrics import mean_squared_error, r2_score, classification_report
 import xgboost as xgb
 
 
-# ---------- Chemins relatifs propres ----------
+# ---------- Clean relative paths ----------
 
-# Déterminer le répertoire de base du projet
+# Determine the base directory of the project dynamically.
+# This ensures the script works even if run from different working directories.
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+
+# Path to the CSV file containing FIFA player data
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "fifa_players.csv")
 
 
 def build_future_label(row):
     """
-    Crée une étiquette 'future_class' à partir de potential - overall_rating + âge.
+    Creates a 'future_class' label based on the difference between potential and overall rating,
+    while also considering age.
+
+    Logic:
+    - Young players (≤ 23) with large potential jump (≥ 10) are considered "high growth".
+    - Decent potential improvement (≥ 4) becomes "likely_improve".
+    - Small difference (≥ -2) is considered "stable".
+    - Negative progression suggests "decline".
+
+    This classification helps predict a career trajectory rather than a numeric value.
     """
     overall = row["overall_rating"]
     potential = row["potential"]
     age = row["age"]
 
-    gap = potential - overall
+    gap = potential - overall  # Improvement margin
 
     if gap >= 10 and age <= 23:
         return "high_growth"
@@ -39,21 +51,25 @@ def build_future_label(row):
 
 
 def main():
-    # 1) Charger les données
-    print(f"Chargement des données depuis : {DATA_PATH}")
+    # 1) Load dataset
+    print(f"Loading data from: {DATA_PATH}")
     df = pd.read_csv(DATA_PATH)
 
-    print("=== Aperçu des données ===")
+    # Show first rows to validate structure
+    print("=== Data preview ===")
     print(df.head(), "\n")
 
-    print("=== Infos colonnes ===")
+    # Show column types, non-null counts, memory usage, etc.
+    print("=== Column info ===")
     print(df.info(), "\n")
 
-    # 2) Choix des features et des cibles
+    # Define target columns and feature list
     target_overall = "overall_rating"
     target_potential = "potential"
     col_age = "age"
 
+    # Selected technical and physical attributes used as predictors
+    # These features are numerical and suitable for ML models.
     feature_cols = [
         "age",
         "height_cm",
@@ -67,97 +83,107 @@ def main():
         "strength",
     ]
 
-    # Vérifier que tout existe
+    # Ensure all required columns exist in the dataset
     for c in feature_cols + [target_overall, target_potential, col_age]:
         if c not in df.columns:
-            raise ValueError(f"La colonne '{c}' est introuvable dans le CSV.")
+            raise ValueError(f"Column '{c}' was not found in the CSV.")
 
-    # Retirer les lignes avec des NaN dans ce qu'on utilise
+    # Remove rows containing missing values in essential columns
     df_clean = df.dropna(subset=feature_cols + [target_overall, target_potential, col_age])
 
-    print(f"\nNombre de joueurs après nettoyage : {len(df_clean)}")
+    print(f"\nNumber of players after cleaning: {len(df_clean)}")
 
-    # 3) Modèle de RÉGRESSION : prédire overall_rating
+    # 3) REGRESSION MODEL — predicting overall rating
+    # Extract features and labels
     X = df_clean[feature_cols]
     y = df_clean[target_overall]
 
+    # Split the dataset into train and test sets
+    # test_size=0.3 → 30% of data for evaluation
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.3, random_state=42
     )
 
-    # XGBoost Regressor - MEILLEUR MODÈLE
-    # XGBoost surpasse Linear Regression en capturant les relations non-linéaires
-    # et en fournissant une meilleure précision (R² plus élevé, RMSE plus faible)
+    # XGBoost is chosen because it handles nonlinear relationships
+    # and typically gives superior performance compared to linear models.
     reg_model = xgb.XGBRegressor(
-        n_estimators=100,
-        learning_rate=0.1,
-        max_depth=5,
-        random_state=42
+        n_estimators=100,        # Number of trees
+        learning_rate=0.1,       # Step size shrinkage
+        max_depth=5,             # Controls tree complexity
+        random_state=42          # Reproducibility
     )
     reg_model.fit(X_train, y_train)
 
+    # Predict overall ratings for the test set
     y_pred = reg_model.predict(X_test)
 
-    mse = mean_squared_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
+    # Evaluate model performance
+    mse = mean_squared_error(y_test, y_pred)  # Measures prediction error
+    r2 = r2_score(y_test, y_pred)             # Measures explained variance
 
-    print("\n=== Modèle de régression XGBoost (overall_rating) ===")
-    print(f"MSE : {mse:.2f}")
-    print(f"R²  : {r2:.3f}")
+    print("\n=== XGBoost Regression Model (overall_rating) ===")
+    print(f"MSE: {mse:.2f}")
+    print(f"R² : {r2:.3f}")
 
-    print("\nImportance des features (impact sur la prédiction) :")
+    # Display feature importance sorted from highest to lowest
+    print("\nFeature importance (prediction impact):")
     feature_importance = pd.DataFrame({
         'Feature': feature_cols,
         'Importance': reg_model.feature_importances_
     }).sort_values('Importance', ascending=False)
     print(feature_importance.to_string(index=False))
 
-    # Graphique vrai vs prédit
+    # Scatter plot to compare true ratings vs predicted ones
     plt.figure()
     plt.scatter(y_test, y_pred, alpha=0.3)
-    plt.xlabel("Vraies notes (overall_rating)")
-    plt.ylabel("Notes prédites")
-    plt.title("Régression : vrai vs prédit (overall_rating)")
+    plt.xlabel("True scores (overall_rating)")
+    plt.ylabel("Predicted scores")
+    plt.title("Regression: true vs predicted (overall_rating)")
 
+    # Diagonal line for perfect predictions
     min_val = min(y_test.min(), y_pred.min())
     max_val = max(y_test.max(), y_pred.max())
-    plt.plot([min_val, max_val], [min_val, max_val], "r--")  # diagonale parfaite
+    plt.plot([min_val, max_val], [min_val, max_val], "r--")
 
     plt.tight_layout()
     
-    # Créer le dossier pour les images ML si nécessaire
+    # Ensure output image directory exists
     ml_images_dir = os.path.join(PROJECT_ROOT, "Images", "ml")
     os.makedirs(ml_images_dir, exist_ok=True)
     
+    # Save the regression plot
     out_path_plot = os.path.join(ml_images_dir, "reg_true_vs_pred.png")
     plt.savefig(out_path_plot)
-    print(f"Graphique 'reg_true_vs_pred.png' sauvegardé dans : {out_path_plot}")
+    print(f"Plot 'reg_true_vs_pred.png' saved in: {out_path_plot}")
 
-    # 4) Modèle de CLASSIFICATION : prédire future_class
+    # 4) CLASSIFICATION — predicting future class
     df_clean["future_class"] = df_clean.apply(build_future_label, axis=1)
 
-    print("\nRépartition des classes futures :")
+    print("\nFuture class distribution:")
     print(df_clean["future_class"].value_counts(), "\n")
 
+    # Features and labels for the classification model
     X_cls = df_clean[feature_cols]
     y_cls = df_clean["future_class"]
 
+    # stratify=y_cls ensures all classes are represented proportionally
     Xc_train, Xc_test, yc_train, yc_test = train_test_split(
         X_cls, y_cls, test_size=0.2, random_state=42, stratify=y_cls
     )
 
+    # Multinomial logistic regression → handles multi-class classification
     clf = LogisticRegression(
-        max_iter=1000,
-        multi_class="multinomial"
+        max_iter=1000,            # Increase iterations to ensure convergence
+        multi_class="multinomial" # Enables softmax classification
     )
     clf.fit(Xc_train, yc_train)
 
     yc_pred = clf.predict(Xc_test)
 
-    print("=== Modèle de classification (future_class) ===")
+    print("=== Classification Model (future_class) ===")
     print(classification_report(yc_test, yc_pred))
 
-    # 5) Exemple : analyse d'un joueur artificiel
+    # 5) Example prediction using a manually created player profile
     example_player = {
         "age": 20,
         "height_cm": 175.0,
@@ -173,31 +199,33 @@ def main():
 
     example_df = pd.DataFrame([example_player])
 
+    # Predict regression and classification outputs
     overall_pred_example = reg_model.predict(example_df[feature_cols])[0]
     future_class_example = clf.predict(example_df[feature_cols])[0]
     future_proba_example = clf.predict_proba(example_df[feature_cols])[0]
     classes = clf.classes_
 
-    print("\n=== Analyse d'un joueur d'exemple ===")
-    print("Données du joueur :")
+    print("\n=== Example Player Analysis ===")
+    print("Player data:")
     for k, v in example_player.items():
         print(f"  {k:15s} = {v}")
 
-    print(f"\nNote globale prédite           : {overall_pred_example:.1f}")
-    print(f"Classe future prédite          : {future_class_example}")
-    print("Probabilités par classe :")
+    print(f"\nPredicted overall rating     : {overall_pred_example:.1f}")
+    print(f"Predicted future class       : {future_class_example}")
+    print("Class probabilities:")
+
+    # Print probability distribution across all possible classes
     for cls, proba in zip(classes, future_proba_example):
         print(f"  {cls:15s} -> {proba:.3f}")
 
-    # Sauvegarder le modèle de régression (note actuelle)
+    # Create output directory for models if needed
     models_dir = os.path.join(PROJECT_ROOT, 'models')
     os.makedirs(models_dir, exist_ok=True)
     
+    # Save trained models for later use
     joblib.dump(reg_model, os.path.join(models_dir, 'regression_model.pkl'))
-        
-    # Sauvegarder le modèle de classification (futur)
     joblib.dump(clf, os.path.join(models_dir, 'classification_model.pkl'))
-    print("Modèles sauvegardés !")
+    print("Models saved!")
 
 
 if __name__ == "__main__":
