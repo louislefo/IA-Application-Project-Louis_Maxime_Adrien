@@ -7,15 +7,15 @@ from datetime import datetime
 import xgboost as xgb
 import csv
 
-# 1. Configuration de la page
+# 1. Page configuration
 st.set_page_config(page_title="AI Football Scout", layout="wide", initial_sidebar_state="expanded")
 st.title("⚽ AI Football Performance Analyzer")
 st.markdown("### Player Performance Analysis & Prediction with XGBoost")
 
-# Définir le chemin racine du projet
+# Define the project root path
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# 2. Chargement des modèles (mis en cache pour la rapidité)
+# 2. Load models (cached for speed)
 @st.cache_resource
 def load_models():
     try:
@@ -32,16 +32,15 @@ if reg_model is None or clf_model is None:
     st.error("❌ Models not found! Please run training with 'ml_analysis.py' first")
     st.stop()
 
-# Définir les chemins
-# Définir les chemins
-# PROJECT_ROOT est déjà défini plus haut
+# Define paths
+# PROJECT_ROOT is already defined above
 DATA_PATH = os.path.join(PROJECT_ROOT, "data", "fifa_players.csv")
 PLAYERS_DB_PATH = os.path.join(PROJECT_ROOT, "data", "history.csv")
 
-# Créer le dossier si nécessaire
+# Create directory if needed
 os.makedirs(os.path.dirname(PLAYERS_DB_PATH), exist_ok=True)
 
-# 3. Fonction pour charger la base de joueurs ajoutés
+# 3. Function to load the added players database
 # @st.cache_data removed to ensure real-time updates
 def load_added_players():
     if os.path.exists(PLAYERS_DB_PATH):
@@ -142,11 +141,11 @@ if analyze_button:
     if not name or name.strip() == "":
         st.error("❌ Please enter the player name!")
     else:
-        # PREDICTIONS avec XGBoost
+        # PREDICTIONS with XGBoost
         predicted_rating = reg_model.predict(input_df)[0]
         future_class = clf_model.predict(input_df)[0]
         
-        # Probabilités pour le classificateur
+        # Probabilities for the classifier
         try:
             future_proba = clf_model.predict_proba(input_df)[0]
             classes = clf_model.classes_
@@ -154,7 +153,7 @@ if analyze_button:
             future_proba = None
             classes = []
 
-        # Stocker les résultats dans le session_state
+        # Store results in session_state
         st.session_state['analysis_results'] = {
             'name': name,
             'input_df': input_df.copy(), # Important: keep a copy of inputs at analysis time
@@ -166,11 +165,11 @@ if analyze_button:
         }
         st.success(f"✅ Analysis complete for **{name}**")
 
-# Affichage basé sur le session_state (persistant au rechargement)
+# Display based on session_state (persistent on reload)
 if 'analysis_results' in st.session_state:
     results = st.session_state['analysis_results']
     
-    # Récupérer les variables depuis le state
+    # Retrieve variables from state
     res_name = results['name']
     predicted_rating = results['predicted_rating']
     future_class = results['future_class']
