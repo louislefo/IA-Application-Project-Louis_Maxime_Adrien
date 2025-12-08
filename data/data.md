@@ -1,3 +1,5 @@
+# Kaggle Dataset
+
 https://www.kaggle.com/datasets/maso0dahmed/football-players-data
 
 This comprehensive dataset offers detailed information on approximately 17,000 FIFA football players, meticulously scraped from SoFIFA.com.
@@ -57,3 +59,10 @@ composure: Rating for composure.
 marking: Rating for marking.
 standing_tackle: Rating for standing tackle.
 sliding_tackle: Rating for sliding tackle.
+
+The dataset is stored in the `data/` folder as `fifa_players.csv`.
+
+# Our data
+
+Our data is stored in the `data/` folder as `history.csv`.
+We store the data in a csv file to be able to save the history of the players we have analyzed.

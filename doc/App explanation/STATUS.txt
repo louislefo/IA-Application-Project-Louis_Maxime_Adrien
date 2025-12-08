@@ -1,113 +1,113 @@
 ╔════════════════════════════════════════════════════════════════════════════╗
 ║                                                                            ║
-║          ⚽ AI FOOTBALL PERFORMANCE ANALYZER - APPLICATION COMPLÈTE ⚽      ║
+║          ⚽ AI FOOTBALL PERFORMANCE ANALYZER - COMPLETE APPLICATION        ║
 ║                                                                            ║
-║                  Machine Learning avec XGBoost + Streamlit                 ║
+║                  Machine Learning with XGBoost + Streamlit                 ║
 ║                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 
 
-📊 ÉTAT DU PROJET - 4 Décembre 2025
+📊 PROJECT STATUS - December 8, 2025
 ═══════════════════════════════════════════════════════════════════════════
 
-✅ COMPOSANTS OPÉRATIONNELS:
+✅ OPERATIONAL COMPONENTS:
 
   🤖 Machine Learning
-     ├─ XGBoost Regressor (Note globale)
+     ├─ XGBoost Regressor (Overall Rating)
      │  └─ Performance: R² = 0.795 ⭐⭐⭐⭐⭐
      │
-     └─ Logistic Regression Classifier (Carrière)
+     └─ Logistic Regression Classifier (Career Trajectory)
         └─ Accuracy: 89% ⭐⭐⭐⭐⭐
 
-  🎮 Application Web
+  🎮 Web Application
      ├─ Framework: Streamlit
      ├─ Interface: Interactive forms + visualizations
-     └─ Status: ✅ OPÉRATIONNELLE
+     └─ Status: ✅ OPERATIONAL
 
-  💾 Base de Données
-     ├─ Données d'entrée: 17,954 joueurs FIFA
-     └─ Joueurs ajoutés: added_players.csv
+  💾 Database
+     ├─ Input Data: 17,954 FIFA players
+     └─ Added Players: history.csv
 
   📚 Documentation
-     ├─ 8 fichiers de documentation
-     ├─ Guides détaillés
-     └─ Code commenté
+     ├─ 8 documentation files
+     ├─ Detailed guides
+     └─ Commented code
 
 
-🚀 DÉMARRAGE EN 3 ÉTAPES
+🚀 3-STEP STARTUP
 ═══════════════════════════════════════════════════════════════════════════
 
   1️⃣  INSTALLATION (2 min)
       $ pip install -r requirements.txt
 
-  2️⃣  ENTRAÎNEMENT (2 min) [UNE FOIS SEULEMENT]
+  2️⃣  TRAINING (2 min) [ONCE ONLY]
       $ cd src
       $ python ml_analysis.py
 
-  3️⃣  LANCEMENT (1 min)
+  3️⃣  LAUNCH (1 min)
       $ streamlit run src/application.py
       
-      → L'app s'ouvrira automatiquement à http://localhost:8501
+      → The app will automatically open at http://localhost:8501
 
 
-📱 INTERFACE PRINCIPALE
+📱 MAIN INTERFACE
 ═══════════════════════════════════════════════════════════════════════════
 
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    ⚽ AI FOOTBALL PERFORMANCE ANALYZER                   │
-│                   Analyse et Prédiction avec XGBoost                     │
+│                   Analysis & Prediction with XGBoost                     │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │  SIDEBAR                    │  MAIN AREA                                │
 │  ════════════════════════════╪════════════════════════════════════════  │
 │                              │                                         │
-│  ➕ Ajouter Nouveau Joueur   │  👤 Profil du Joueur                    │
-│                              │  ├─ Tableau des attributs              │
-│  📋 Infos Générales          │  ├─ Nom, Âge, Taille, Poids          │
-│  ├─ Nom *                    │  └─ 10 attributs techniques            │
-│  ├─ Âge (15-40)              │                                         │
-│  ├─ Taille (150-210 cm)      │  📊 Visualisation                      │
-│  └─ Poids (50-100 kg)        │  ├─ Graphique en barres                │
-│                              │  └─ Voir attributs forts/faibles       │
-│  ⚙️ Attributs Techniques      │                                         │
-│  ├─ 🎯 Finishing             │  🔍 ANALYSER LE JOUEUR                 │
-│  ├─ 🎮 Dribbling             │  [Bouton Principal]                    │
+│  ➕ Add New Player          │  👤 Player Profile                      │
+│                              │  ├─ Attributes Table                   │
+│  📋 General Info            │  ├─ Name, Age, Height, Weight          │
+│  ├─ Name *                   │  └─ 10 Technical Attributes            │
+│  ├─ Age (15-40)              │                                         │
+│  ├─ Height (150-210 cm)      │  📊 Visualization                      │
+│  └─ Weight (50-100 kg)       │  ├─ Bar Chart                          │
+│                              │  └─ View strong/weak attributes        │
+│  ⚙️ Technical Attributes     │                                         │
+│  ├─ 🎯 Finishing             │  🔍 ANALYZE PLAYER                     │
+│  ├─ 🎮 Dribbling             │  [Primary Button]                      │
 │  ├─ 📤 Short Passing         │                                         │
-│  ├─ 💨 Acceleration          │  ✅ Résultats d'Analyse               │
-│  ├─ 🏃 Sprint Speed          │  ├─ 📈 Note Globale (0-100)            │
-│  ├─ ⚡ Stamina               │  ├─ ⚡ Attribut Fort                    │
-│  └─ 💪 Strength              │  ├─ 📊 Attribut à Travailler          │
+│  ├─ 💨 Acceleration          │  ✅ Analysis Results                   │
+│  ├─ 🏃 Sprint Speed          │  ├─ 📈 Overall Rating (0-100)          │
+│  ├─ ⚡ Stamina               │  ├─ ⚡ Strongest Attribute             │
+│  └─ 💪 Strength              │  ├─ 📊 Attribute to Improve            │
 │                              │                                         │
-│  [7 Sliders 0-100]          │  🔮 Prédiction Carrière               │
+│  [7 Sliders 0-100]          │  🔮 Career Prediction                  │
 │                              │  ├─ ✨ High Growth / 📈 Improve      │
 │                              │  ├─ ⚖️ Stable / 📉 Decline            │
-│                              │  └─ Probabilités détaillées           │
+│                              │  └─ Detailed Probabilities            │
 │                              │                                         │
-│                              │  💾 AJOUTER À LA BASE                 │
-│                              │  [Bouton Sauvegarde]                  │
+│                              │  💾 ADD TO DATABASE                    │
+│                              │  [Save Button]                        │
 │                              │                                         │
-│                              │  📚 Base de Données                    │
-│                              │  ├─ Liste des joueurs ajoutés         │
-│                              │  ├─ Stats globales                    │
-│                              │  └─ Nombre de superstars              │
+│                              │  📚 Database History                   │
+│                              │  ├─ List of added players             │
+│                              │  ├─ Global stats                      │
+│                              │  └─ Number of superstars              │
 │                              │                                         │
 └────────────────────────────────────────────────────────────────────────┘
 
 
-📊 MODÈLES DE PRÉDICTION
+📊 PREDICTION MODELS
 ═══════════════════════════════════════════════════════════════════════════
 
-┌─ RÉGRESSION (Note Globale) ───────────────────────────────────────────┐
+┌─ REGRESSION (Overall Rating) ───────────────────────────────────────────┐
 │                                                                        │
-│  Modèle: XGBoost Regressor                                            │
+│  Model: XGBoost Regressor                                             │
 │  Output: 0-100 (float)                                                │
 │                                                                        │
-│  Features Importantes:                                                │
+│  Important Features:                                                  │
 │  1. short_passing    ████████████████████ 43.7%                      │
 │  2. age              ██████████ 21.9%                                │
 │  3. dribbling        █████ 9.8%                                      │
 │  4. strength         ████ 8.8%                                       │
-│  5. autres           ███ 15.8%                                       │
+│  5. others           ███ 15.8%                                       │
 │                                                                        │
 │  Performance:                                                         │
 │  • R² Score: 0.795 ⭐⭐⭐⭐⭐                                            │
@@ -116,15 +116,15 @@
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 
-┌─ CLASSIFICATION (Carrière) ───────────────────────────────────────────┐
+┌─ CLASSIFICATION (Career) ───────────────────────────────────────────────┐
 │                                                                        │
-│  Modèle: Logistic Regression (Multinomial)                           │
-│  Classes: 4 catégories                                               │
+│  Model: Logistic Regression (Multinomial)                           │
+│  Classes: 4 categories                                               │
 │                                                                        │
-│  1. high_growth      ✨  Jeune talent (50% du modèle)                │
-│  2. likely_improve   📈  Bonne progression (28%)                     │
-│  3. stable           ⚖️   Joueur établi (22%)                         │
-│  4. decline          📉  En régression (<1%)                         │
+│  1. high_growth      ✨  Young talent (50% of model)                 │
+│  2. likely_improve   📈  Good progression (28%)                      │
+│  3. stable           ⚖️   Established player (22%)                    │
+│  4. decline          📉  Regressing (<1%)                            │
 │                                                                        │
 │  Performance:                                                         │
 │  • Accuracy: 89% ⭐⭐⭐⭐⭐                                             │
@@ -135,84 +135,82 @@
 └────────────────────────────────────────────────────────────────────────┘
 
 
-🎯 UTILISATION TYPIQUE
+🎯 TYPICAL USAGE
 ═══════════════════════════════════════════════════════════════════════════
 
-Temps par joueur: ~2 minutes
+Time per player: ~2 minutes
 
 ┌─ WORKFLOW ────────────────────────────────────────────────────────────┐
 │                                                                        │
-│  ① Ouvrir l'app       → run_app.bat  (1 sec)                         │
+│  ① Open App           → streamlit run... (1 sec)                     │
 │                                                                        │
-│  ② Remplir le formulaire                                             │
-│     • Nom: Vinícius Jr                                               │
-│     • Âge: 20                                                         │
-│     • Taille/Poids: 180/73                                           │
-│     • Attributs: 75-92                                               │
+│  ② Fill Form                                                         │
+│     • Name: Vinícius Jr                                              │
+│     • Age: 20                                                         │
+│     • Height/Weight: 180/73                                           │
+│     • Attributes: 75-92                                               │
 │                                    (1 min)                             │
 │                                                                        │
-│  ③ Analyser            → Cliquer [🔍 Analyser]  (1 sec)              │
+│  ③ Analyze            → Click [🔍 Analyze] (1 sec)                   │
 │                                                                        │
-│  ④ Consulter résultats                                               │
-│     • Note: 78-80 🟡                                                  │
-│     • Classe: high_growth ✨                                          │
-│     • Probabilités: [84%, 16%, 0%, 0%]                               │
+│  ④ View Results                                                      │
+│     • Rating: 78-80 🟡                                                 │
+│     • Class: high_growth ✨                                          │
+│     • Probabilities: [84%, 16%, 0%, 0%]                               │
 │                                            (1 min)                     │
 │                                                                        │
-│  ⑤ Sauvegarder         → Cliquer [💾 Ajouter]  (1 sec)              │
+│  ⑤ Save               → Click [💾 Add to DB] (1 sec)                 │
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 
 
-📚 DOCUMENTATION DISPONIBLE
+📚 AVAILABLE DOCUMENTATION
 ═══════════════════════════════════════════════════════════════════════════
 
   🟢 QUICKSTART.md (5 min)
-     └─ Démarrage rapide et commandes essentielles
+     └─ Quick start and essential commands
 
   🔵 PROJECT_SUMMARY.md (10 min)
-     └─ Vue d'ensemble technique du projet
+     └─ Technical overview of the project
 
   🟠 USAGE.md (15 min)
-     └─ Guide complet d'utilisation
+     └─ Complete usage guide
 
   🟣 APP_INTERFACE.md (20 min)
-     └─ Guide détaillé de l'interface
+     └─ Detailed interface guide
 
   📄 README.md (30 min)
-     └─ Documentation scientifique et méthodologie
+     └─ Scientific documentation and methodology
 
   📖 INDEX.md
-     └─ Navigation et index complet
+     └─ Navigation and complete index
 
   ⚡ CHEATSHEET.md
-     └─ Feuille de triche rapide
+     └─ Quick cheat sheet
 
   🔧 project_config.json
-     └─ Configuration complète du projet
+     └─ Complete project configuration
 
 
-🛠️ STRUCTURE DES FICHIERS
+🛠️ FILE STRUCTURE
 ═══════════════════════════════════════════════════════════════════════════
 
-projet/
+project/
 │
 ├── 🟢 APPLICATION
 │   ├── src/
-│   │   ├── application.py ⭐ (Application principale)
-│   │   ├── ml_analysis.py (Entraînement)
+│   │   ├── application.py ⭐ (Main Application)
+│   │   ├── ml_analysis.py (Training)
 │   │   ├── ml_analysis.ipynb (Notebook)
 │   │   └── ...
-│   ├── run_app.bat (Launcher Windows)
-│   └── run_app.ps1 (Launcher PowerShell)
 │
-├── 🔵 MODÈLES & DATA
+├── 🔵 MODELS & DATA
 │   ├── models/
 │   │   ├── regression_model.pkl (XGBoost)
 │   │   └── classification_model.pkl (Logistic)
 │   └── data/
-│       ├── fifa_players.csv (17,954 joueurs)
-│       └── added_players.csv (Vos ajouts)
+│       ├── fifa_players.csv (17,954 players)
+│       └── history.csv (Your additions)
 │
 ├── 📘 DOCUMENTATION
 │   ├── README.md
@@ -225,116 +223,110 @@ projet/
 │   └── project_config.json
 │
 └── ⚙️  CONFIG
-    ├── requirements.txt (Dépendances)
-    └── test_setup.py (Vérification)
+    ├── requirements.txt (Dependencies)
+    └── test_setup.py (Verification)
 
 
-✅ VÉRIFICATION PRÉ-LANCEMENT
+✅ PRE-LAUNCH CHECK
 ═══════════════════════════════════════════════════════════════════════════
 
-Avant de lancer, vérifier:
+Before launching, check:
 
-  ✅ Python 3.10+ installé
-  ✅ Dépendances: pip install -r requirements.txt
-  ✅ Modèles entraînés: cd src && python ml_analysis.py
-  ✅ Data présente: data/fifa_players.csv
-  ✅ Dossier models/ créé automatiquement
-  ✅ Port 8501 disponible
+  ✅ Python 3.10+ installed
+  ✅ Dependencies: pip install -r requirements.txt
+  ✅ Trained models: cd src && python ml_analysis.py
+  ✅ Data present: data/fifa_players.csv
+  ✅ models/ directory created automatically
+  ✅ Port 8501 available
 
-Autotest rapide:
+Quick self-test:
   $ python test_setup.py
   
-Si tout est ✅, vous êtes prêt!
+If everything is ✅, you are ready!
 
 
-🎯 CAS D'USAGE
+🎯 USE CASES
 ═══════════════════════════════════════════════════════════════════════════
 
-1. 🔍 Recrutement Sportif
-   └─ Évaluer un joueur rapidement et objectivement
+1. 🔍 Sports Recruitment
+   └─ Evaluate a player quickly and objectively
 
-2. 📈 Développement de Joueurs
-   └─ Identifier les points faibles à améliorer
+2. 📈 Player Development
+   └─ Identify weak points to improve
 
-3. 🧮 Analyse Comparative
-   └─ Comparer plusieurs joueurs dans la base
+3. 🧮 Comparative Analysis
+   └─ Compare multiple players in the database
 
-4. 🎓 Recherche Académique
-   └─ Valider des hypothèses sur la performance
+4. 🎓 Academic Research
+   └─ Validate hypotheses on performance
 
 
-⚡ COMMANDES UTILES
+⚡ USEFUL COMMANDS
 ═══════════════════════════════════════════════════════════════════════════
 
-  Lancer l'app
-  $ run_app.bat              (Windows - Plus simple)
+  Launch App
   $ streamlit run src/application.py
 
-  Entraîner les modèles
+  Train Models
   $ cd src && python ml_analysis.py
 
-  Tester le setup
+  Test Setup
   $ python test_setup.py
 
-  Installer les dépendances
+  Install Dependencies
   $ pip install -r requirements.txt
 
 
-💡 ASTUCE: PROFILS CLASSIQUES
+💡 TIP: CLASSIC PROFILES
 ═══════════════════════════════════════════════════════════════════════════
 
-  📊 Jeune Talent
-     Âge: 20 | Finishing: 75 | Dribbling: 90 | Speed: 92
-     → Note: 78-80 | Classe: high_growth ✨
+  📊 Young Talent
+     Age: 20 | Finishing: 75 | Dribbling: 90 | Speed: 92
+     → Rating: 78-80 | Class: high_growth ✨
 
-  ⭐ Attaquant Elite  
-     Âge: 24 | Finishing: 92 | Dribbling: 88 | Speed: 96
-     → Note: 89-91 | Classe: high_growth ✨
+  ⭐ Elite Striker  
+     Age: 24 | Finishing: 92 | Dribbling: 88 | Speed: 96
+     → Rating: 89-91 | Class: high_growth ✨
 
-  🛡️ Défenseur Solide
-     Âge: 32 | Short Pass: 90 | Strength: 95 | Speed: 77
-     → Note: 84-86 | Classe: stable ⚖️
+  🛡️ Solid Defender
+     Age: 32 | Short Pass: 90 | Strength: 95 | Speed: 77
+     → Rating: 84-86 | Class: stable ⚖️
 
-  👴 Joueur Vieillissant
-     Âge: 37 | Finishing: 85 | Dribbling: 78 | Speed: 75
-     → Note: 84-85 | Classe: decline 📉
+  👴 Aging Player
+     Age: 37 | Finishing: 85 | Dribbling: 78 | Speed: 75
+     → Rating: 84-85 | Class: decline 📉
 
 
-🎯 OBJECTIFS ATTEINTS
+🎯 GOALS ACHIEVED
 ═══════════════════════════════════════════════════════════════════════════
 
-  ✅ Application web complète et fonctionnelle
-  ✅ Modèles ML performants (XGBoost R²=0.795)
-  ✅ Interface intuitive avec Streamlit
-  ✅ Base de données managée en CSV
-  ✅ Documentation exhaustive
-  ✅ Code bien commenté et structuré
-  ✅ Tests automatisés inclus
-  ✅ Launchers fournis (batch & PowerShell)
+  ✅ Complete and functional web application
+  ✅ High-performance ML models (XGBoost R²=0.795)
+  ✅ Intuitive interface with Streamlit
+  ✅ Managed CSV database
+  ✅ Exhaustive documentation
+  ✅ Well-commented and structured code
+  ✅ Automated tests included
 
 
-🏁 STATUS FINAL
+🏁 FINAL STATUS
 ═══════════════════════════════════════════════════════════════════════════
 
   Version: 1.0.0
-  Status: ✅ OPÉRATIONNEL
-  Testé: ✅ OUI
-  Documentation: ✅ COMPLÈTE
-  Prêt pour: ✅ PRODUCTION
+  Status: ✅ OPERATIONAL
+  Tested: ✅ YES
+  Documentation: ✅ COMPLETE
+  Ready for: ✅ PRODUCTION
 
 
 ═══════════════════════════════════════════════════════════════════════════
 
-         🚀 TOUT EST PRÊT! Lancez l'application avec:
-         
-                    run_app.bat  (Windows)
-         
-         ou
+         🚀 ALL SET! Launch the application with:
          
          streamlit run src/application.py
 
 ═══════════════════════════════════════════════════════════════════════════
 
 Version: 1.0.0
-Date: 4 Décembre 2025
-Status: ✅ OPÉRATIONNEL
+Date: December 8, 2025
+Status: ✅ OPERATIONAL

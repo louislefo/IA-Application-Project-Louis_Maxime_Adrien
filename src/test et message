@@ -1,5 +1,0 @@
-il rest a reussir a rentrer le joueur dans la base de donéee et suppression de la demande de mail donc lancement direct de l'aaplication
-
-commande à utiliser pour le lancement pour le moment
-python -m streamlit run src/application.py
-ctr c pour stopper et fermer le localhost

@@ -1,72 +1,72 @@
-# 📱 Guide d'Interface de l'Application
+# 📱 Application Interface Guide
 
-## Vue d'Ensemble
+## Overview
 
-L'application AI Football Performance Analyzer est une interface Streamlit intuitive pour analyser et prédire les performances des joueurs de football.
+The AI Football Performance Analyzer application is an intuitive Streamlit interface for analyzing and predicting football player performances.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │         ⚽ AI FOOTBALL PERFORMANCE ANALYZER                      │
-│        Analyse et Prédiction avec XGBoost                        │
+│        Analysis & Prediction with XGBoost                        │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────┐  ┌──────────────────────────────────────────────┐
 │             │  │                                              │
-│   SIDEBAR   │  │         ZONE PRINCIPALE                      │
+│   SIDEBAR   │  │         MAIN AREA                            │
 │             │  │                                              │
-│ + Ajouter   │  │ • Profil du Joueur                           │
-│   Nouveau   │  │ • Visualisation des Attributs                │
-│   Joueur    │  │ • Résultats d'Analyse                        │
-│             │  │ • Prédictions de Carrière                    │
-│ • Nom       │  │ • Probabilités par Classe                    │
-│ • Âge       │  │ • Base de Données des Joueurs                │
-│ • Taille    │  │                                              │
-│ • Poids     │  │                                              │
-│ • Attr.     │  │                                              │
-│   Techniques│  │                                              │
+│ + Add       │  │ • Player Profile                             │
+│   New       │  │ • Attribute Visualization                    │
+│   Player    │  │ • Analysis Results                           │
+│             │  │ • Career Predictions                         │
+│ • Name      │  │ • Class Probabilities                        │
+│ • Age       │  │ • Player Database                            │
+│ • Height    │  │                                              │
+│ • Weight    │  │                                              │
+│ • Tech.     │  │                                              │
+│   Attributes│  │                                              │
 │             │  │                                              │
 └─────────────┘  └──────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🎮 Sidebar - Formulaire d'Entrée
+## 🎮 Sidebar - Input Form
 
-### Section 1: Informations Générales
+### Section 1: General Information
 
 ```
-┌─ Informations Générales ─────────────────┐
+┌─ General Information ────────────────────┐
 │                                          │
-│ Nom du joueur *                          │
-│ [Joueur Test________________]            │
+│ Player Name *                            │
+│ [Test Player__________]                  │
 │                                          │
-│ Âge *                                    │
+│ Age *                                    │
 │ ◀──────●─────────► 22                    │
 │ 15        40                             │
 │                                          │
-│ Taille (cm) *                            │
+│ Height (cm) *                            │
 │ ◀──────●─────────► 180                   │
 │ 150      210                             │
 │                                          │
-│ Poids (kg) *                             │
+│ Weight (kg) *                            │
 │ ◀──────●─────────► 75                    │
 │ 50       100                             │
 │                                          │
 └──────────────────────────────────────────┘
 ```
 
-**Conseils:**
-- Le nom est obligatoire
-- L'âge doit être entre 15 et 40 ans (validé)
-- La taille se mesure généralement entre 160-210 cm
-- Le poids pour un footballeur est entre 60-95 kg
+**Tips:**
+- Name is mandatory
+- Age must be between 15 and 40 (validated)
+- Height is usually between 160-210 cm
+- Weight for a footballer is between 60-95 kg
 
-### Section 2: Attributs Techniques & Physiques
+### Section 2: Technical & Physical Attributes
 
 ```
-┌─ Attributs Techniques & Physiques ───────┐
+┌─ Technical & Physical Attributes ────────┐
 │                                          │
-│ 🎯 Finishing (Finition)                  │
+│ 🎯 Finishing                             │
 │ ◀──────●─────────► 70                    │
 │ 0       100                              │
 │                                          │
@@ -74,7 +74,7 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 │ ◀──────●─────────► 75                    │
 │ 0       100                              │
 │                                          │
-│ 📤 Short Passing (Passes courtes)        │
+│ 📤 Short Passing                         │
 │ ◀──────●─────────► 70                    │
 │ 0       100                              │
 │                                          │
@@ -82,66 +82,66 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 │ ◀──────●─────────► 80                    │
 │ 0       100                              │
 │                                          │
-│ 🏃 Sprint Speed (Vitesse)                │
+│ 🏃 Sprint Speed                          │
 │ ◀──────●─────────► 80                    │
 │ 0       100                              │
 │                                          │
-│ ⚡ Stamina (Endurance)                    │
+│ ⚡ Stamina                               │
 │ ◀──────●─────────► 70                    │
 │ 0       100                              │
 │                                          │
-│ 💪 Strength (Force)                      │
+│ 💪 Strength                              │
 │ ◀──────●─────────► 65                    │
 │ 0       100                              │
 │                                          │
 └──────────────────────────────────────────┘
 ```
 
-**Interprétation des Attributs:**
+**Attribute Interpretation:**
 
-| Attribut | Signification | Bon Niveau |
-|----------|--------------|-----------|
-| **Finishing** | Capacité à convertir les chances | 75+ |
-| **Dribbling** | Contrôle du ballon et feintes | 75+ |
-| **Short Passing** | Passes précises courte distance | 70+ |
-| **Acceleration** | Vitesse d'accélération | 75+ |
-| **Sprint Speed** | Vitesse maximale | 75+ |
-| **Stamina** | Endurance physique | 70+ |
-| **Strength** | Force physique/contacts | 65+ |
+| Attribute | Meaning | Good Level |
+|-----------|---------|------------|
+| **Finishing** | Ability to convert chances | 75+ |
+| **Dribbling** | Ball control and feints | 75+ |
+| **Short Passing** | Accurate short-distance passing | 70+ |
+| **Acceleration** | Initial speed | 75+ |
+| **Sprint Speed** | Maximum speed | 75+ |
+| **Stamina** | Physical endurance | 70+ |
+| **Strength** | Physical handling/contacts | 65+ |
 
 ---
 
-## 📊 Zone Principale - Résultats
+## 📊 Main Area - Results
 
-### Section 1: Profil du Joueur
+### Section 1: Player Profile
 
 ```
-┌─ Profil du Joueur ───────────────────────────┐
+┌─ Player Profile ─────────────────────────────┐
 │                                              │
-│ Nom: Joueur Test                             │
+│ Name: Test Player                            │
 │                                              │
 │ ┌──────────────────────────────────────────┐ │
-│ │ Attribut           │ Valeur               │ │
+│ │ Attribute          │ Value               │ │
 │ ├──────────────────────────────────────────┤ │
-│ │ Âge                │ 22                   │ │
-│ │ Taille (cm)        │ 180                  │ │
-│ │ Poids (kg)         │ 75                   │ │
-│ │ Finishing          │ 70                   │ │
-│ │ Dribbling          │ 75                   │ │
-│ │ Short Passing      │ 70                   │ │
-│ │ Acceleration       │ 80                   │ │
-│ │ Sprint Speed       │ 80                   │ │
-│ │ Stamina            │ 70                   │ │
-│ │ Strength           │ 65                   │ │
+│ │ Age                │ 22                  │ │
+│ │ Height (cm)        │ 180                 │ │
+│ │ Weight (kg)        │ 75                  │ │
+│ │ Finishing          │ 70                  │ │
+│ │ Dribbling          │ 75                  │ │
+│ │ Short Passing      │ 70                  │ │
+│ │ Acceleration       │ 80                  │ │
+│ │ Sprint Speed       │ 80                  │ │
+│ │ Stamina            │ 70                  │ │
+│ │ Strength           │ 65                  │ │
 │ └──────────────────────────────────────────┘ │
 │                                              │
 └──────────────────────────────────────────────┘
 ```
 
-### Section 2: Visualisation des Attributs
+### Section 2: Attribute Visualization
 
 ```
-┌─ Visualisation des Attributs ───────────────┐
+┌─ Attribute Visualization ───────────────────┐
 │                                             │
 │  100 ┤                                      │
 │      │                                      │
@@ -159,33 +159,33 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 └─────────────────────────────────────────────┘
 ```
 
-### Section 3: Bouton d'Action
+### Section 3: Action Button
 
 ```
 ┌─────────────────────────────────────────────┐
 │                                             │
-│  [🔍 Analyser le Joueur] [  ] [  ]         │
+│  [🔍 Analyze Player] [  ] [  ]             │
 │                                             │
-│  (Bouton Principal - Type: Primary)        │
-│  Couleur: Bleu                             │
-│  Clique pour lancer l'analyse               │
+│  (Primary Button)                          │
+│  Color: Blue                               │
+│  Click to start analysis                   │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🎯 Après l'Analyse
+## 🎯 After Analysis
 
-### Section 1: Résultats d'Analyse
+### Section 1: Analysis Results
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│ ✅ Analyse réalisée pour **Joueur Test**                   │
+│ ✅ Analysis complete for **Test Player**                   │
 │                                                            │
 │ ┌─────────────┬─────────────┬─────────────────────────────┐
-│ │ 📈 Note    │ ⚡ Attribut  │ 📊 Attribut                 │
-│ │ Globale    │ Fort        │ à Travailler                │
+│ │ 📈 Est.    │ ⚡ Strongest │ 📊 Attribute                │
+│ │ Rating     │ Attribute   │ to Improve                  │
 │ │            │             │                             │
 │ │ 80.5/100   │ Sprint      │ Strength                    │
 │ │ 🟢          │ Speed       │ 65/100                      │
@@ -196,17 +196,17 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 └────────────────────────────────────────────────────────────┘
 ```
 
-### Section 2: Prédiction de Carrière
+### Section 2: Career Prediction
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│ 🔮 Prédiction de Trajectoire Professionnelle               │
+│ 🔮 Career Trajectory Prediction                            │
 │                                                            │
-│ ✨ FUTURE SUPERSTAR (Potentiel très élevé)                │
+│ ✨ FUTURE SUPERSTAR (Very High Potential)                  │
 │                                                            │
-│ • Jeune joueur avec un énorme potentiel                    │
-│ • Progression attendue très importante                     │
-│ • À absolument recruter/développer                        │
+│ • Young player with enormous potential                     │
+│ • Significant growth expected                              │
+│ • Must recruit/develop                                     │
 │                                                            │
 │ ┌─────────────┬────────────┬─────────┬─────────────┐     │
 │ │ High Growth │Likely Impr.│ Stable  │ Decline     │     │
@@ -216,37 +216,37 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 └────────────────────────────────────────────────────────────┘
 ```
 
-### Section 3: Boutons d'Ajout à la Base de Données
+### Section 3: Add to Database Buttons
 
 ```
 ┌────────────────────────────────────────────────────────────┐
 │                                                            │
-│  [💾 Ajouter à la Base]  [  ]  [  ]                       │
+│  [💾 Add to Database]   [  ]  [  ]                        │
 │                                                            │
-│  (Bouton pour sauvegarder le joueur)                      │
-│  Couleur: Vert/Succès                                     │
+│  (Button to save the player)                              │
+│  Color: Green/Success                                     │
 │                                                            │
 └────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📚 Base de Données des Joueurs
+## 📚 Player Database
 
 ```
-┌─ Base de Données des Joueurs Ajoutés ──────────────────────┐
+┌─ Analysis History ─────────────────────────────────────────┐
 │                                                            │
 │ ┌──────────────────────────────────────────────────────┐  │
 │ │ player_name │ age │ ... │ pred_overall │ pred_future │  │
 │ ├──────────────────────────────────────────────────────┤  │
-│ │ Joueur Test │ 22  │ ... │ 80.5         │ high_growth │  │
+│ │ Test Player │ 22  │ ... │ 80.5         │ high_growth │  │
 │ │ Messi Test  │ 25  │ ... │ 85.2         │ high_growth │  │
-│ │ Ancien Test │ 35  │ ... │ 78.3         │ stable      │  │
+│ │ Old Test    │ 35  │ ... │ 78.3         │ stable      │  │
 │ └──────────────────────────────────────────────────────┘  │
 │                                                            │
 │ ┌──────────┬────────┬─────────────┬────────────┐          │
-│ │ Total    │ Note   │ Âge Moyen   │ Superstars│          │
-│ │ 3        │ 81.3   │ 27.3        │ 2         │          │
+│ │ Total    │ Avg    │ Avg Age     │ Superstars │          │
+│ │ 3        │ 81.3   │ 27.3        │ 2          │          │
 │ └──────────┴────────┴─────────────┴────────────┘          │
 │                                                            │
 └────────────────────────────────────────────────────────────┘
@@ -254,53 +254,53 @@ L'application AI Football Performance Analyzer est une interface Streamlit intui
 
 ---
 
-## 🎨 Légende des Couleurs et Icônes
+## 🎨 Legend: Colors and Icons
 
-### Statuts
-| Icône | Sens | Couleur |
-|-------|------|---------|
-| ✅ | Succès | Vert |
-| ❌ | Erreur | Rouge |
-| ⚠️ | Attention | Orange |
-| ℹ️ | Info | Bleu |
-| 📭 | Vide | Gris |
+### Status
+| Icon | Meaning | Color |
+|------|---------|-------|
+| ✅ | Success | Green |
+| ❌ | Error | Red |
+| ⚠️ | Warning | Orange |
+| ℹ️ | Info | Blue |
+| 📭 | Empty | Gray |
 
-### Notes de Joueur
-| Icône | Range | Signification |
-|-------|-------|---------------|
+### Player Ratings
+| Icon | Range | Meaning |
+|------|-------|---------|
 | 🟢 | 80-100 | Excellent |
-| 🟡 | 65-79 | Bon |
-| 🔴 | <65 | À développer |
+| 🟡 | 65-79 | Good |
+| 🔴 | <65 | Needs Development |
 
-### Prédictions de Carrière
-| Emoji | Classe | Signification |
-|-------|--------|---------------|
+### Career Predictions
+| Emoji | Class | Meaning |
+|-------|-------|---------|
 | ✨ | high_growth | Future Superstar |
-| 📈 | likely_improve | Potentiel Solide |
-| ⚖️ | stable | Joueur Stable |
-| 📉 | decline | En Déclin |
+| 📈 | likely_improve | Solid Potential |
+| ⚖️ | stable | Stable Player |
+| 📉 | decline | Declining |
 
 ---
 
-## 💡 Conseils d'Utilisation
+## 💡 Usage Tips
 
-1. **Entrez des données cohérentes**
-   - Un attaquant aura généralement plus de Finishing
-   - Un défenseur aura plus de Strength
+1. **Enter consistent data**
+   - A striker will usually have higher Finishing
+   - A defender will have higher Strength
 
-2. **Regardez le graphique**
-   - Il vous aide à visualiser les points forts/faibles
-   - Détectez les anomalies rapidement
+2. **Look at the chart**
+   - Helps you visualize strengths/weaknesses
+   - Detect anomalies quickly
 
-3. **Vérifiez les probabilités**
-   - Si toutes les probabilités sont proches (25%), le modèle est incertain
-   - Si une probabilité > 80%, le modèle est confiant
+3. **Check probabilities**
+   - If all probabilities are close (25%), the model is uncertain
+   - If one probability > 80%, the model is confident
 
-4. **Comparez dans la base**
-   - Ajoutez plusieurs joueurs
-   - Identifiez les patterns
-   - Analysez les statistiques globales
+4. **Compare in the database**
+   - Add multiple players
+   - Identify patterns
+   - Analyze global stats
 
 ---
 
-**Bon scouting! ⚽🚀**
+**Happy Scouting! ⚽🚀**
