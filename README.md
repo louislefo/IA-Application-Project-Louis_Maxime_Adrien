@@ -206,15 +206,25 @@ Our XGBoost implementation achieved state-of-the-art results on the validation s
 *   **R² > 0.90:** The model explains over 90% of the variance in player ratings.
 *   **Feature Importance:** As visualized below, `Reactions` and `Ball Control` emerged as the dominant predictors.
 
+<p align="center">
+  <img src="Images/model_comparison/regression_models_comparison.png" width="450" alt="Regression Models Comparison" style="border-radius: 5px;">
+</p>
+
+A changer ! 
 
 <p align="center">
   <img src="Images/model_comparison/feature_importance_comparison.png" width="450" alt="Feature Importance Comparison" style="border-radius: 5px;">
 </p>
 
+
+
 ### 2. Future Impact
 This tool fundamentally changes the scouting workflow:
 1.  **Objectivity:** Removes cognitive bias (e.g., favoring players from certain regions).
 2.  **Scalability:** Allows scanning of 17,000+ players instantly, highlighting only the top 1% `high_growth` candidates.
+   
+
+
 
 ---
 
@@ -222,4 +232,9 @@ This tool fundamentally changes the scouting workflow:
 
 This project demonstrates how **Data Science** can modernize sports analytics. By combining **Robust Data Engineering** (Median Imputation, Delta-based Targets) with **Ensemble Learning** (XGBoost), we built a tool that not only describes the present but predicts the future.
 
+
+
+## Our app 
+
+https://iasoccerproject.streamlit.app/
 
