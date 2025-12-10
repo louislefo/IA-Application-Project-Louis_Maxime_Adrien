@@ -8,23 +8,26 @@
 
 ---
 
-## Table of Contents
-
-1.  [Introduction](#i-introduction)
-2.  [Datasets](#ii-datasets)
-3.  [Methodology](#iii-methodology)
-4.  [Evaluation & Analysis](#iv-evaluation--analysis)
-5.  [Related Work](#v-related-work)
-6.  [Conclusion](#vi-conclusion-discussion)
-
----
-
 ## Installation
 
 ```bash
 git clone https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien.git
 cd IA-Application-Project-Louis_Maxime_Adrien
 ```
+
+## Table of Contents
+
+1.  [Introduction](#i-introduction)
+2.  [Datasets](#ii-datasets)
+3.  [Project Structure](#iiiproject-structure)
+4.  [Application Features](#ivapplication-features)
+5.  [Methodology](#v-methodology)
+6.  [Evaluation & Analysis](#vi-evaluation--analysis)
+7.  [Related Work](#vii-related-work)
+8.  [Conclusion](#viii-conclusion-discussion)
+
+---
+
 <br>
 
 ## I. Introduction
@@ -46,7 +49,7 @@ We aim to build a system that can:
 
 These capabilities can support real-world applications such as transfer decision-making, youth development monitoring, match preparation, and long-term squad planning.
 
-<br><br>
+<br>
 
 ## II. Datasets
 
@@ -120,9 +123,9 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
 | **Feature Richness**   | ✅ **51 varied attributes** (physical, technical, mental) for comprehensive analysis. | ❌ High **Multicollinearity** (several attributes are highly correlated with each other), which will necessitate rigorous feature selection.    |
 | **Modeling Objective** | ✅ **`potential`** is an excellent indicator for future growth prediction.            | ❌ The `overall_rating` relies heavily on the **`reactions`** variable, which could bias the model if overused, at the expense of other skills. |
 
----
+<br>
 
-### Project Structure
+## III. Project Structure
 
 ```bash
 IA-Application-Project-Louis_Maxime_Adrien/
@@ -161,13 +164,14 @@ IA-Application-Project-Louis_Maxime_Adrien/
 ├── README.md
 └── requirements.txt
 ```
----
 
-### Application Features
+<br>
+
+## IV. Application Features
 
 The Streamlit application provides an interactive environment to analyze football players using Machine Learning models.
 
-#### 1. Player Input Form
+### 1. Player Input Form
 Users can manually enter player information through the sidebar interface.
 
 **General attributes:**
@@ -192,7 +196,7 @@ Users can manually enter player information through the sidebar interface.
 - Strength  
 - Agility  
 
-#### 2. Machine Learning Predictions
+### 2. Machine Learning Predictions
 Two models located in the `/models` folder power the predictions:
 
 - **XGBoost Regression:** predicts the player's estimated *overall rating* (0–100).  
@@ -204,7 +208,7 @@ Two models located in the `/models` folder power the predictions:
 
 The app also shows the **probabilities** of each class for better interpretability.
 
-#### 3. Real-Time Visual Analysis
+### 3. Real-Time Visual Analysis
 After submitting a player, the app automatically generates:
 
 - A bar chart of all attributes  
@@ -215,7 +219,7 @@ After submitting a player, the app automatically generates:
 
 This makes the analysis intuitive and visual.
 
-#### 4. Save Player to History
+### 4. Save Player to History
 Each analysis can be saved into: data/history.csv
 
 Each saved line includes:
@@ -227,7 +231,7 @@ Each saved line includes:
 
 The file is created automatically if it does not exist.
 
-#### 5. History Dashboard
+### 5. History Dashboard
 A dedicated section in the app displays:
 
 - A full table of all previously analyzed players  
@@ -239,9 +243,9 @@ A dedicated section in the app displays:
 
 This provides a complete overview of past evaluations and long-term insights.
 
-<br><br>
+<br>
 
-## III. Methodology: From Raw Data to Predictive Signals
+## V. Methodology: From Raw Data to Predictive Signals
 
 Our approach follows a standard industry-grade Machine Learning pipeline: **Data Engineering → Model Selection → Production Deployment**.
 
@@ -306,9 +310,9 @@ reg_model = xgb.XGBRegressor(
 For the `future_class`, we needed **Calibration** (Accurate Probabilities) over simple accuracy.
 *   **Why Logistic?** It offers interpretable probabilities. In scouting, knowing a player is "*70% likely to improve*" is more actionable than a black-box "Yes/No".
 
-<br><br>
+<br>
 
-## IV. Production Application (The "Face")
+## VI. Production Application (The "Face")
 The model is served via a **Streamlit** web application, designed for low-latency inference.
 
 ### Performance Optimization: Caching
@@ -328,9 +332,9 @@ def load_models():
 ```
 **Impact:** This simple decorator reduces inference time from **~2.5s** (loading from disk) to **<50ms** (reading from RAM).
 
-<br><br>
+<br>
 
-## V. Evaluation & Results
+## VII. Evaluation & Results
 
 ### 1. Regression Analysis
 Our XGBoost implementation achieved state-of-the-art results on the validation set.
@@ -355,9 +359,9 @@ This tool fundamentally changes the scouting workflow:
 2.  **Scalability:** Allows scanning of 17,000+ players instantly, highlighting only the top 1% `high_growth` candidates.
    
 
-<br><br>
+<br>
 
-## VI. Conclusion
+## VIII. Conclusion
 
 This project demonstrates how **Data Science** can modernize sports analytics. By combining **Robust Data Engineering** (Median Imputation, Delta-based Targets) with **Ensemble Learning** (XGBoost), we built a tool that not only describes the present but predicts the future.
 
