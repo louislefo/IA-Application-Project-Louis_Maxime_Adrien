@@ -14,6 +14,22 @@
 git clone https://github.com/louislefo/IA-Application-Project-Louis_Maxime_Adrien.git
 cd IA-Application-Project-Louis_Maxime_Adrien
 ```
+Create your Python environment and install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+You can if you want create the models (already in the repository) :
+
+```bash
+python scr/ml_analysis.py
+```
+
+And run the application with this command :
+
+```bash
+streamlit run scr/app.py
+```
 
 ## Table of Contents
 
@@ -24,7 +40,9 @@ cd IA-Application-Project-Louis_Maxime_Adrien
 5.  [Methodology: From Raw Data to Predictive Signals](#v-methodology-from-raw-data-to-predictive-signals)
 6.  [Production Application (The "Face")](#vi-production-application-the-face)
 7.  [Evaluation & Results](#vii-evaluation--results)
-8.  [Conclusion](#viii-conclusion)
+8.  [Related Work](#viii-related-work)
+9.  [Conclusion](#ix-conclusion)
+10. [Possible Improvements](#x-possible-improvements)
 
 ---
 
@@ -108,7 +126,7 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
     <img src="Images/analyse/value_vs_rating.png" width="500">
   </p>
 
-- **Top Nationalities:** **Spain** (1,341 players), **Argentina**, and **France** are the most represented countries.
+- **Top Nationalities:** **ENGLAND** , **GERMANY**, and **SPAIN** are the most represented countries.
 
   <p align="center">
     <img src="Images/analyse/top_nationalities.png" width="500">
@@ -175,23 +193,17 @@ Users can manually enter player information through the sidebar interface.
 - Name  
 - Age  
 - Height  
-- Weight  
 
 **Technical abilities:**
 - Dribbling  
 - Finishing  
-- Passing  
-- Ball control  
-- Vision  
-- Short passing  
-- Long passing  
+- Short Passing   
 
 **Physical attributes:**
 - Acceleration  
 - Sprint speed  
 - Stamina  
-- Strength  
-- Agility  
+- Strength   
 
 ### 2. Machine Learning Predictions
 Two models located in the `/models` folder power the predictions:
@@ -295,17 +307,45 @@ For predicting the `overall_rating` (0-100), we selected **XGBoost (Extreme Grad
 
 ```python
 # Extract from src/ml_analysis.py
+
+# 1. Split the dataset (30% for testing)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# 2. Check & Initialize the XGBoost Regressor
 reg_model = xgb.XGBRegressor(
     n_estimators=100,    # 100 decision trees involved
     learning_rate=0.1,   # Step size shrinkage to prevent overfitting
     max_depth=5,         # Depth limits complexity (Bias-Variance tradeoff)
     random_state=42
 )
+
+# 3. Train the model
+reg_model.fit(X_train, y_train)
 ```
 
 #### B. Classification Head: Multinomial Logistic Regression
 For the `future_class`, we needed **Calibration** (Accurate Probabilities) over simple accuracy.
 *   **Why Logistic?** It offers interpretable probabilities. In scouting, knowing a player is "*70% likely to improve*" is more actionable than a black-box "Yes/No".
+
+```python
+# Extract from src/ml_analysis.py
+
+# 1. Split with Stratification (preserves class balance)
+Xc_train, Xc_test, yc_train, yc_test = train_test_split(
+    X_cls, y_cls, test_size=0.2, random_state=42, stratify=y_cls
+)
+
+# 2. Initialize the Logistic Regression
+clf = LogisticRegression(
+    max_iter=1000,            # Ensure convergence
+    multi_class="multinomial" # Enable softmax for multi-class
+)
+
+# 3. Train the model
+clf.fit(Xc_train, yc_train)
+```
 
 <br>
 
@@ -358,8 +398,8 @@ We analyzed which features contributed most to the models' decisions.
 *   **Dribbling**: A key offensive attribute.
 
 <p align="center">
-  <img src="Images/model_comparison/feature_importance_comparison.png" width="600" alt="Feature Importance Comparison" style="border-radius: 5px;">
-</p>
+  <img src="Images/model_comparison/feature_importance_comparison.png" width="800" alt="Feature Importance Comparison" style="border-radius: 5px;">
+</p> 
 
 ### 3. Classification Analysis: Predicting Future Development
 We classified players into growth categories: `stable`, `likely_improve`, or `high_growth`.
@@ -376,14 +416,50 @@ We classified players into growth categories: `stable`, `likely_improve`, or `hi
 *   **Regression**: **XGBoost** is the recommended engine for rating prediction due to its superior accuracy in capturing non-linear relationships.
 *   **Classification**: **Logistic Regression** provides an excellent balance of accuracy and interpretability for predicting future growth.
 *   **Impact**: When scouting, weighting "Short Passing" and "Dribbling" is crucial as they are strong proxies for overall quality. This tool allows instant scanning of thousands of players to highlight the top 1% `high_growth` candidates.
+*   
+
+
+### Final output of our application :
+
+<p align="center">
+  <img src="Images\Application\Application_results.png" width="600" alt="Final Output" style="border-radius: 5px;">
+</p>
+
+This is the prediction of the player's overall rating and future development.
+
    
 
 <br>
 
-## VIII. Conclusion
+## VIII. Related Work
 
-This project demonstrates how **Data Science** can modernize sports analytics. By combining **Robust Data Engineering** (Median Imputation, Delta-based Targets) with **Ensemble Learning** (XGBoost), we built a tool that not only describes the present but predicts the future.
+We utilized several open-source libraries and documentation resources to build this project.
 
+### Tools & Libraries
+*   **[Pandas](https://pandas.pydata.org/) & [NumPy](https://numpy.org/):** Used for data cleaning, manipulation, and median imputation strategies.
+*   **[Scikit-Learn](https://scikit-learn.org/):** Provided necessary tools for data splitting (`train_test_split`), preprocessing (StandardScaling), and the Logistic Regression model.
+*   **[XGBoost](https://xgboost.readthedocs.io/):** The core gradient boosting library used for our high-performance regression model.
+*   **[Streamlit](https://streamlit.io/):** The framework chosen to turn our analysis scripts into an interactive user-facing web application.
+*   **[Matplotlib](https://matplotlib.org/) & [Seaborn](https://seaborn.pydata.org/):** Used for Exploratory Data Analysis (EDA) visualizations.
+
+### References
+*   **Dataset:** [Kaggle - Football Players Data](https://www.kaggle.com/datasets/maso0dahmed/football-players-data)
+*   **Documentation:** Official documentation for XGBoost and Scikit-Learn were consulted for hyperparameter tuning and pipeline optimization.
+
+<br>
+
+## IX. Conclusion
+
+
+This project demonstrates the power of Data Science in modernizing sports analytics. By integrating robust data engineering with machine learning, we successfully built the AI Football Performance Analyzer—a tool that moves beyond subjective observation to provide objective, predictive player evaluations.Our results validate the hybrid modeling approach: XGBoost effectively captured complex skill interactions for rating prediction ($R^2 \approx 0.80$), while Logistic Regression accurately classified future potential with ~89% accuracy. The Streamlit deployment proves that these advanced insights can be made instantly accessible and actionable for decision-makers.Ultimately, this project bridges the gap between raw statistics and concrete scouting decisions. While future improvements could include real-time data integration, the current solution successfully empowers analysts to identify "High Growth" talent using rigorous statistical evidence.
+
+## X. Possible Improvements
+
+To further enhance the capabilities of the AI Football Performance Analyzer, several features could be implemented in future iterations:
+
+*   **Salary Estimation:** Integrating a mechanism to suggest a **fair market value** or recommended salary range for players based on their predicted performance and potential.
+*   **Position Recommendation:** Developing a classifier to analyze a player's attribute profile and suggest **optimal alternative positions** (e.g., suggesting a fast winger could be retrained as a wing-back).
+*   **Real-Time Data:** Connecting to live match data feeds to provide dynamic, week-to-week performance tracking.
 
 
 
