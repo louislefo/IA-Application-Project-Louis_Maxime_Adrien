@@ -1,6 +1,6 @@
 # Comprehensive Explanation of `src/ml_analysis.py`
 
-This document provides a detailed, step-by-step explanation of the `ml_analysis.py` script. It is designed for an intermediate beginner to understand the libraries used, the logic behind the machine learning models, and how data flows through the program.
+This document provides a detailed, step-by-step explanation of the `ml_analysis.py` script. It is designed to understand the libraries used, the logic behind the machine learning models, and how data flows through the program.
 
 ---
 

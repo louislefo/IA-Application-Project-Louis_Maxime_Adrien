@@ -19,12 +19,12 @@ cd IA-Application-Project-Louis_Maxime_Adrien
 
 1.  [Introduction](#i-introduction)
 2.  [Datasets](#ii-datasets)
-3.  [Project Structure](#iiiproject-structure)
-4.  [Application Features](#ivapplication-features)
-5.  [Methodology](#v-methodology)
-6.  [Evaluation & Analysis](#vi-evaluation--analysis)
-7.  [Related Work](#vii-related-work)
-8.  [Conclusion](#viii-conclusion-discussion)
+3.  [Project Structure](#iii-project-structure)
+4.  [Application Features](#iv-application-features)
+5.  [Methodology: From Raw Data to Predictive Signals](#v-methodology-from-raw-data-to-predictive-signals)
+6.  [Production Application (The "Face")](#vi-production-application-the-face)
+7.  [Evaluation & Results](#vii-evaluation--results)
+8.  [Conclusion](#viii-conclusion)
 
 ---
 
@@ -129,9 +129,6 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
 
 ```bash
 IA-Application-Project-Louis_Maxime_Adrien/
-├── .conda/
-├── .devcontainer/
-│   └── devcontainer.json
 ├── data/
 │   ├── data.md
 │   ├── fifa_players.csv
@@ -332,31 +329,53 @@ def load_models():
 ```
 **Impact:** This simple decorator reduces inference time from **~2.5s** (loading from disk) to **<50ms** (reading from RAM).
 
+Our app : https://iasoccerproject.streamlit.app/
+
 <br>
 
 ## VII. Evaluation & Results
 
-### 1. Regression Analysis
-Our XGBoost implementation achieved state-of-the-art results on the validation set.
-*   **R² > 0.90:** The model explains over 90% of the variance in player ratings.
-*   **Feature Importance:** As visualized below, `Reactions` and `Ball Control` emerged as the dominant predictors.
+### 1. Regression Analysis: Predicting Overall Rating
+Our goal was to build a regression model that can accurately predict a player's `overall_rating` based on their attributes.
+
+**Models Tested:** Linear Regression, Random Forest, Gradient Boosting, XGBoost.
+
+**Results:**
+*   **Linear Regression**: Performed poorly (R² ~0.47), indicating non-linear relationships.
+*   **Tree-based Models**: All performed significantly better.
+*   **The Winner**: **XGBoost** achieved the best performance (**R² = 0.7989**), closely followed by Gradient Boosting.
 
 <p align="center">
-  <img src="Images/model_comparison/regression_models_comparison.png" width="450" alt="Regression Models Comparison" style="border-radius: 5px;">
+  <img src="Images/model_comparison/regression_models_comparison.png" width="600" alt="Regression Models Comparison" style="border-radius: 5px;">
 </p>
 
-A changer ! 
+### 2. Feature Importance Analysis
+We analyzed which features contributed most to the models' decisions.
+
+**Key Factors:**
+*   **Short Passing**: The most critical technical skill for overall rating.
+*   **Age**: A major determinant of a player's career stage.
+*   **Dribbling**: A key offensive attribute.
 
 <p align="center">
-  <img src="Images/model_comparison/feature_importance_comparison.png" width="450" alt="Feature Importance Comparison" style="border-radius: 5px;">
+  <img src="Images/model_comparison/feature_importance_comparison.png" width="600" alt="Feature Importance Comparison" style="border-radius: 5px;">
 </p>
 
+### 3. Classification Analysis: Predicting Future Development
+We classified players into growth categories: `stable`, `likely_improve`, or `high_growth`.
 
+**Results:**
+*   **Performance**: All models (Logistic Regression, RF, GB, XGB) performed very well, with accuracies around **88-89%**.
+*   **The Winner**: **Logistic Regression** and **XGBoost** tied for top performance (Accuracy ~0.8925). Logistic Regression was chosen for the application due to its interpretability and speed.
 
-### 2. Future Impact
-This tool fundamentally changes the scouting workflow:
-1.  **Objectivity:** Removes cognitive bias (e.g., favoring players from certain regions).
-2.  **Scalability:** Allows scanning of 17,000+ players instantly, highlighting only the top 1% `high_growth` candidates.
+<p align="center">
+  <img src="Images/model_comparison/classification_models_comparison.png" width="600" alt="Classification Models Comparison" style="border-radius: 5px;">
+</p>
+
+### 4. Conclusions and Recommendations
+*   **Regression**: **XGBoost** is the recommended engine for rating prediction due to its superior accuracy in capturing non-linear relationships.
+*   **Classification**: **Logistic Regression** provides an excellent balance of accuracy and interpretability for predicting future growth.
+*   **Impact**: When scouting, weighting "Short Passing" and "Dribbling" is crucial as they are strong proxies for overall quality. This tool allows instant scanning of thousands of players to highlight the top 1% `high_growth` candidates.
    
 
 <br>
@@ -367,7 +386,5 @@ This project demonstrates how **Data Science** can modernize sports analytics. B
 
 
 
-## Our app 
 
-https://iasoccerproject.streamlit.app/
 
