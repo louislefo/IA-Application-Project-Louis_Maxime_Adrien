@@ -120,6 +120,8 @@ Age analysis confirms that the average player level (`overall_rating`) **peaks b
 | **Feature Richness**   | ✅ **51 varied attributes** (physical, technical, mental) for comprehensive analysis. | ❌ High **Multicollinearity** (several attributes are highly correlated with each other), which will necessitate rigorous feature selection.    |
 | **Modeling Objective** | ✅ **`potential`** is an excellent indicator for future growth prediction.            | ❌ The `overall_rating` relies heavily on the **`reactions`** variable, which could bias the model if overused, at the expense of other skills. |
 
+---
+
 ### Project Structure
 
 ```bash
@@ -159,6 +161,7 @@ IA-Application-Project-Louis_Maxime_Adrien/
 ├── README.md
 └── requirements.txt
 ```
+---
 
 ### Application Features
 
@@ -189,8 +192,6 @@ Users can manually enter player information through the sidebar interface.
 - Strength  
 - Agility  
 
----
-
 #### 2. Machine Learning Predictions
 Two models located in the `/models` folder power the predictions:
 
@@ -203,8 +204,6 @@ Two models located in the `/models` folder power the predictions:
 
 The app also shows the **probabilities** of each class for better interpretability.
 
----
-
 #### 3. Real-Time Visual Analysis
 After submitting a player, the app automatically generates:
 
@@ -215,8 +214,6 @@ After submitting a player, the app automatically generates:
 - The probability breakdown for all classes  
 
 This makes the analysis intuitive and visual.
-
----
 
 #### 4. Save Player to History
 Each analysis can be saved into: data/history.csv
@@ -229,8 +226,6 @@ Each saved line includes:
 - Timestamp  
 
 The file is created automatically if it does not exist.
-
----
 
 #### 5. History Dashboard
 A dedicated section in the app displays:
