@@ -445,6 +445,13 @@ We utilized several open-source libraries and documentation resources to build t
 ### References
 *   **Dataset:** [Kaggle - Football Players Data](https://www.kaggle.com/datasets/maso0dahmed/football-players-data)
 *   **Documentation:** Official documentation for XGBoost and Scikit-Learn were consulted for hyperparameter tuning and pipeline optimization.
+*   **Other projects on the same dataset :**
+  
+    Talent Radar : [Kaggle - link](https://www.kaggle.com/code/jumvajbizcoqkohjy8/talent-radar/notebook)
+
+    fifa-analysis-regression-on-player-value : [Kaggle - link](https://www.kaggle.com/code/phdoot2fifa-analysis-regression-on-player-value)
+
+    Wage predictor : [ Kagle - link](https://www.kaggle.com/code/xreina8/fifa-player-value-wage-predictor)
 
 <br>
 
