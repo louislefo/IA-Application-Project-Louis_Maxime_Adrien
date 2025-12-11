@@ -12,6 +12,10 @@ title: AI Football Performance Analyzer
 
 ---
 
+### Presentation video
+
+Video : [link](https://youtu.be/uER-DRtvihs)
+
 
 ## Table of Contents
 
